@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,6 +27,11 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid UserDto userDto) {
         userServiceImpl.registerNewUser(userDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/send/code")
+    public ResponseEntity<String> register(@RequestParam("email") String email) {
+        userServiceImpl.sendCodeToEmail(email);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

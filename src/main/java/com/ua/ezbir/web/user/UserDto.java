@@ -15,4 +15,8 @@ public class UserDto {
     @NotBlank(message = "Password should not be empty!")
     @Size(min = 4, max = 30, message = "Password should be between 4 and 30 characters")
     private String password;
+
+    @NotBlank(message = "Password should not be empty!")
+    @Size(min = 4, max = 30, message = "Password should be between 4 and 30 characters")
+    private String repeatPassword;
 }
