@@ -6,6 +6,7 @@ import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.code.CodeDto;
 import com.ua.ezbir.web.user.UserDto;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerNewUser(UserDto userDto) {
+    public void registerNewUser(UserDto userDto,HttpSession session) {
         Optional<User> userExist = userRepository.findByEmail(userDto.getEmail());
         if(!userDto.getPassword().equals(userDto.getRepeatPassword())){
             throw new BadRequestException("Password don`t match");
@@ -35,20 +36,31 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("Email has already used");
         }
         User user=User.builder()
+                .username(userDto.getUsername())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();
-//        Save after correct code
-//        userRepository.save(user);
+        session.setAttribute("user",user);
     }
 
     @Override
-    public void sendCodeToEmail(String email) {
+    public void sendCodeToEmail(String email, HttpSession session) {
         CodeDto code=new CodeDto();
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Password Reset");
         message.setText("Code: "+code.getCode());
+        session.setAttribute("code",code.getCode());
         javaMailSender.send(message);
+    }
+
+    @Override
+    public void checkCode(String code,HttpSession session) {
+        String correctCode= (String) session.getAttribute("code");
+        if(!code.equals(correctCode)){
+            throw new BadRequestException("Code is wrong");
+        }
+        User user=(User) session.getAttribute("user");
+        userRepository.save(user);
     }
 }

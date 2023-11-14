@@ -3,6 +3,7 @@ package com.ua.ezbir.web.controllers;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.services.impl.UserServiceImpl;
 import com.ua.ezbir.web.user.UserDto;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,18 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Valid UserDto userDto) {
-        userServiceImpl.registerNewUser(userDto);
+    public ResponseEntity<String> register(@RequestBody @Valid UserDto userDto,HttpSession session) {
+        userServiceImpl.registerNewUser(userDto,session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/send/code")
-    public ResponseEntity<String> register(@RequestParam("email") String email) {
-        userServiceImpl.sendCodeToEmail(email);
+    public ResponseEntity<String> sendCode(@RequestParam("email") String email,HttpSession session) {
+        userServiceImpl.sendCodeToEmail(email,session);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/check/code")
+    public ResponseEntity<String> checkCode(@RequestParam("code") String code, HttpSession session) {
+        userServiceImpl.checkCode(code,session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
