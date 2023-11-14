@@ -1,13 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Montserrat:wght@300;600&display=swap');
-
-.wrapper{
-    width: 1920px;
-}
-
 body {
-      margin: 0;
-      background: #E4E4E4; 
-    }
+    margin: 0;
+    background: #E4E4E4;
+}
 
 .logo {
     color: #084A16;
@@ -18,7 +12,6 @@ body {
     font-weight: 700;
     line-height: normal;
     margin-left: 100px;
-    margin-top: 2;
 }
 
 .rectangle {
