@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.square{
+    background-color: #fff;
+    width: 720px;
+    height: 740px;
+    margin-top: 88px;
+    margin-bottom: 90px;
+    border-radius: 10px;
+}
+
+footer{
+    margin-left: 650px;
+}
+
+input{
+    margin-left: 67px;
+    width: 576px;
+    height: 75px;
+    border-radius: 5px;
+    background: #E4E4E4;
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Cormorant Garamond;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.email{
+    margin-top: 102px;
+    padding-left: 20px;
+}
+
+.password{
+    margin-top: 18px;
+    padding-left: 20px;
+}
+
+.login{
+    width: 400px;
+    height: 75px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #084A16;
+    margin-top: 46px;
+    margin-left: 154px;
+
+    color: #FFF;
+    text-align: center;
+    font-family: Cormorant Garamond;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.btn-signup{
+
+    margin-left: 67px; 
+    display: flex;
+    width: 576px;
+    height: 77px;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin-top: 80px;
+    border-radius: 7px;
+
+
+    color: #000;
+    font-family: Cormorant Garamond;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.forgotpassword{
+    margin-top: 20px;
+    margin-left: 252px;
+    display: flex;
+    width: 204px;
+    height: 34px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+
+    color: #084A16;
+    text-align: center;
+    font-family: Cormorant Garamond;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    
+}
+
+.btn-signup p {
+  color: #084A16;/* Колір зеленого тексту */
+  margin: 0; /* Знімаємо зовнішні відступи у <p> */
+}

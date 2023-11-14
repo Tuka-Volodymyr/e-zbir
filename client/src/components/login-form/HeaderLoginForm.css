@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Montserrat:wght@300;600&display=swap');
+
+.wrapper{
+    width: 1920px;
+}
+
+body {
+      margin: 0;
+      background: #E4E4E4; 
+    }
+
+.logo {
+    color: #084A16;
+    text-align: center;
+    font-family: Cormorant Garamond;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 100px;
+    margin-top: 2;
+}
+
+.rectangle {
+    display: flex;
+    align-items: center;
+    width: 1920px;
+    height: 100px;
+    background-color: #fff;
+    overflow: visible;
+}
+
+
+
+/*button,input{
+    color: rgba(0, 0, 0, 0.50);
+    text-align: center;
+    font-family: Cormorant Garamond;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}*/

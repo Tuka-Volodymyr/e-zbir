@@ -7,7 +7,7 @@ function App() {
     return (
         <div className="wrapper">
             <HeaderLoginForm />
-            <FooterLoginForm/>
+            <FooterLoginForm/> 
         </div>
     );
 }
