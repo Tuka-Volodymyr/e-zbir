@@ -16,6 +16,6 @@ public class Fundraiser
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCollection;
-
+    private Long idFundraiser;
+    private Long idUser;
 }
