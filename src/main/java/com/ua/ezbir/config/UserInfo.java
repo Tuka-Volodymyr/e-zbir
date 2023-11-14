@@ -21,7 +21,7 @@ public class UserInfo implements UserDetails {
     }
 
     public Long getId() {
-        return user.getId();
+        return user.getIdUser();
     }
 
     @Override
