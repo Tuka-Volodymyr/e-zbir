@@ -1,7 +1,7 @@
-import HeaderLoginForm from "../login-form/HeaderLoginForm";
-import FooterLoginForm from "../login-form/FooterLoginForm";
+import HeaderLoginForm from "./components/login-form/HeaderLoginForm";
+import FooterLoginForm from "./components/login-form/FooterLoginForm";
 
-import '../../index.css';
+// import '../../index.css';
 
 function App() {
     return (
