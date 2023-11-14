@@ -2,6 +2,7 @@ package com.ua.ezbir.services.impl;
 
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.domain.exceptions.BadRequestException;
+import com.ua.ezbir.domain.exceptions.UserNotFoundException;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.dto.CodeDto;
@@ -9,9 +10,13 @@ import com.ua.ezbir.web.user.UserDto;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -25,7 +30,16 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.javaMailSender = javaMailSender;
     }
+    public User getUser() {
+        UserDetails userDetails= (UserDetails) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        return userRepository
+                .findByEmail(userDetails.getUsername())
+                .orElseThrow(UserNotFoundException::new);
 
+    }
     @Override
     public void registerNewUser(UserDto userDto,HttpSession session) {
         Optional<User> userExist = userRepository.findByEmail(userDto.getEmail());
@@ -61,5 +75,21 @@ public class UserServiceImpl implements UserService {
         }
         User user=(User) session.getAttribute("user");
         userRepository.save(user);
+    }
+
+    @Override
+    public void addPhoto(MultipartFile file) throws IOException {
+        if (file.isEmpty())
+            throw new BadRequestException("File is empty");
+        byte[] photoBytes = file.getBytes();
+        User user=getUser();
+        user.setBytePhoto(photoBytes);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void addInfoAboutYourself(String data) {
+        User user=getUser();
+        user.setInfoAboutYourself(data);
     }
 }
