@@ -7,7 +7,7 @@ const Header = (props) =>{
     <div className={HeaderCss.content}>
       <div className={HeaderCss.rectangle}>
         {/*<span className={HeaderCss.logo}>Logo</span>*/}
-        <h1 className={HeaderCss.logo}>LOGO</h1>
+        <h1 className={HeaderCss.logo}>Є Збір</h1>
       </div>
     </div>
   )
