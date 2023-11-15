@@ -17,7 +17,7 @@ const Header = (props) =>{
         <nav className='HeaderCss.piclist'>
           <img src="" alt="" />
         </nav>
-
+        <h1 className={HeaderCss.logo}>Є Збір</h1>
       </div>
     </div>
   );
