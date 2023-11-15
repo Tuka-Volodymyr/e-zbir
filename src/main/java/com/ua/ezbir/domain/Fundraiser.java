@@ -12,10 +12,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 @Table(name = "fundraisers")
-public class Fundraiser
-{
+public class Fundraiser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFundraiser;
-    private Long idUser;
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private String text;
+    private boolean closed;
+    @Column(length = 10000000)
+    private byte[] bytePhoto;
 }

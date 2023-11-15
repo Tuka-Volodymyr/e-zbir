@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
+    private Long id;
     private String email;
     private String username;
     private String password;
@@ -24,4 +26,6 @@ public class User {
     @Column(length = 10000000)
     private byte[] bytePhoto;
 
+    @OneToMany(mappedBy = "user")
+    private List<Fundraiser> fundraiserList;
 }
