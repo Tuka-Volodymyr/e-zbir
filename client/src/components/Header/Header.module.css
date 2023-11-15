@@ -23,14 +23,14 @@ body {
     overflow: visible;
 }
 
+.list{
+    font-family: Inter;
+    font-weight: 400;
+     margin-left: 40px;
+}
 
-
-/*button,input{
-    color: rgba(0, 0, 0, 0.50);
-    text-align: center;
-    font-family: Cormorant Garamond;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}*/
+nav a {
+    color: #000;
+    margin-left: 20px;
+   
+}

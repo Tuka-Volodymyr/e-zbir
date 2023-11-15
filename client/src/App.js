@@ -7,9 +7,11 @@ import {
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegForm from "./components/RegForm/RegForm";
 import Header from "./components/Header/Header";
+import ForgPassw from "./components/ForgPassw/ForgPassw";
 
 
 import './App.css';
+
 
 
 const App = (props) =>{
@@ -25,6 +27,8 @@ const App = (props) =>{
               <Route path="/" element={<LoginForm />} />
               {/*<Route path="/login" element={} />*/}
               <Route path="/reg" element={<RegForm />} />
+              <Route path="/ver" element={<ForgPassw />} />
+              
             </Routes>
           </div>
         </BrowserRouter>
