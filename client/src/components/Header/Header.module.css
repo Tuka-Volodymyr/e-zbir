@@ -12,6 +12,7 @@ body {
     font-weight: 600;
     line-height: normal;
     margin-left: 100px;
+    width: 400px;
 }
 
 .rectangle {
@@ -24,13 +25,26 @@ body {
 }
 
 .list{
-    font-family: Inter;
     font-weight: 400;
-     margin-left: 40px;
+    margin-left: 40px;
 }
 
-nav a {
+nav a{
     color: #000;
     margin-left: 20px;
-   
+}
+nav a:hover{
+    color: #084A16;
+}
+.iconsBlock{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    margin-right: 100px;
+}
+.iconsBlock div{
+    margin: 0px 20px 0px 20px;
+}
+.socialNetworks img{
+    margin: 0px 5px 0px 5px;
 }
