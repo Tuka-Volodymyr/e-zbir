@@ -8,6 +8,7 @@ import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.dto.CodeDto;
 import com.ua.ezbir.web.user.UserDto;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,29 +18,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.javaMailSender = javaMailSender;
-    }
+    @Override
     public User getUser() {
-        UserDetails userDetails= (UserDetails) SecurityContextHolder
+        UserDetails userDetails = (UserDetails) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
         return userRepository
                 .findByEmail(userDetails.getUsername())
                 .orElseThrow(UserNotFoundException::new);
-
     }
+
+    @Override
+    public void saveUser(User user) {
+        if (user != null) {
+            userRepository.save(user);
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
     @Override
     public void registerNewUser(UserDto userDto,HttpSession session) {
         Optional<User> userExist = userRepository.findByEmail(userDto.getEmail());
@@ -52,6 +60,7 @@ public class UserServiceImpl implements UserService {
                 .username(userDto.getUsername())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
+                .fundraiserList(new LinkedList<>())
                 .build();
         session.setAttribute("user",user);
     }

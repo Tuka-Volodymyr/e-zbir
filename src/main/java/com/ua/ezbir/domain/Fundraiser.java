@@ -20,9 +20,8 @@ public class Fundraiser {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    private String text;
-    private boolean closed;
-    @Column(length = 10000000)
-    private byte[] bytePhoto;
+    private String name;
+    private String jarLink;
+    private String description;
+    private boolean isClosed;
 }

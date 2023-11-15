@@ -7,7 +7,11 @@ import java.util.Random;
 @Data
 public class CodeDto {
     private String code;
-    public CodeDto(){code=generateCod();}
+
+    public CodeDto() {
+        code = generateCod();
+    }
+
     public String generateCod() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
