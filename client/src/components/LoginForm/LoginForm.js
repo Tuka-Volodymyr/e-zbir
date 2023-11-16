@@ -16,9 +16,9 @@ const LoginForm = (props) =>{
                 <p>OR</p>
                 <div className={LoginFormCss.line}></div>
             </div>
-            <a href="/" className = {LoginFormCss.forgotpassword}>Forgot password?</a>
+            <NavLink className = {LoginFormCss.forgotpassword}  to='/ver'>Forgot password?</NavLink>
             <div className={LoginFormCss.regLink}>
-                <p>Don’t have an account? <NavLink to='/reg'>Sign up</NavLink></p>
+                <p>Don’t have an account? <NavLink to='/register'>Sign up</NavLink></p>
             </div>
         </div>
     </div>

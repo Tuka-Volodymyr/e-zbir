@@ -1,0 +1,13 @@
+.content{
+    width: 768px;
+    height: 200px;
+    background: #fff;
+    margin: 10px;
+}
+
+.content h2{
+    font-size: 38px;
+    font-family: E-Ukraine-Head;
+    font-weight: 200;
+    color: #084A16;
+}
