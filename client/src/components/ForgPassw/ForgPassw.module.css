@@ -5,10 +5,14 @@
 }
 
 .ForgBlock{
+    margin-top: 50px;
+    align-items: center;
     background-color: #fff;
     width: 960px;
-    height: 740px;
+    height: 350px;
     border-radius: 10px;
+    
+    
 }
 
 .content input{
@@ -29,29 +33,16 @@
     align-items: center;
 }
 
-.form input{
-    margin-top: 20px;
-}
-
-
-.line{
-    border: 4px solid #E4E4E4;
-    width: 100%;
-    border-radius: 10px;
-}
-
-.regLink{
-    width: 80%;
-    height: 75px;
-    border-radius: 5px;
-    background: #E4E4E4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+.loginBtn{
     margin-top: 40px;
-}
-.regLink p a{
-    color: #084A16;
+    width: 50%;
+    height: 75px;
+    border-radius: 10px;
+    background: #084A16;
+    color: #ffffff;
+    text-align: center;
     font-weight: 700;
 }
+
+
+

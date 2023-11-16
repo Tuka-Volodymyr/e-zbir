@@ -10,8 +10,6 @@ const ForgPassw = (props) => {
                     <input placeholder="Enter your Email / Phone number" type="text" />
                     <button className={ForgPasswCss.loginBtn}>Search an account</button>
                 </form>
-                <div className={ForgPasswCss.regLink}>
-                </div>
             </div>
         </div>
     );
