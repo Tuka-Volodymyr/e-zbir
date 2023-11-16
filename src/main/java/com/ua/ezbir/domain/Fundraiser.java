@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain;
 
+import com.ua.ezbir.web.dto.FundraiserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +25,12 @@ public class Fundraiser {
     private String jarLink;
     private String description;
     private boolean isClosed;
+
+    public FundraiserDto toFundraiserDto(){
+        return FundraiserDto.builder()
+                .jarLink(getJarLink())
+                .name(getName())
+                .description(getDescription())
+                .build();
+    }
 }
