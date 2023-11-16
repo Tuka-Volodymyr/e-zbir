@@ -27,7 +27,7 @@ const App = (props) =>{
               <Route path="/" element={<LoginForm />} />
               {/*<Route path="/login" element={} />*/}
               <Route path="/reg" element={<RegForm />} />
-              //<Route path="/ver" element={<ForgPassw />} />
+              <Route path="/ver" element={<ForgPassw />} />
               
             </Routes>
           </div>
