@@ -1,5 +1,6 @@
 package com.ua.ezbir.web.controllers;
 
+import com.ua.ezbir.domain.User;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.user.UserDto;
 import jakarta.servlet.http.HttpSession;
@@ -8,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,6 +18,12 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    @GetMapping("/user")
+    public ResponseEntity<?> getUser(@RequestParam("id") Long id) {
+        User user = userService.getUserById(id);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid UserDto userDto,HttpSession session) {
