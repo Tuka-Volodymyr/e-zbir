@@ -1,0 +1,84 @@
+.content{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.regBlock{
+    background-color: #fff;
+    width: 960px;
+    height: 740px;
+    border-radius: 10px;
+}
+
+.content input{
+    width: 80%;
+    height: 75px;
+    border-radius: 5px;
+    background: #E4E4E4;
+    color: rgba(0, 0, 0, 0.50);
+    border: none;
+    padding: 0px 10px 0px 10px;
+    outline: none;
+}
+
+.form{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form input{
+    margin-top: 20px;
+}
+
+.loginBtn{
+    margin-top: 40px;
+    width: 50%;
+    height: 75px;
+    border-radius: 10px;
+    background: #084A16;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+}
+
+.blockOr{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.blockOr p{
+    padding: 20px;
+}
+
+.line{
+    border: 4px solid #E4E4E4;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+.loginLink{
+    width: 80%;
+    height: 75px;
+    border-radius: 5px;
+    background: #E4E4E4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.loginLink p a{
+    color: #084A16;
+    font-weight: 700;
+}
+
+   
+
+
