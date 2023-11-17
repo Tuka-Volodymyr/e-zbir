@@ -7,7 +7,6 @@ import RegFormCss from "./RegForm.module.css";
 
 
 const RegForm = (props) =>{
-
     // Hook from react-hook-form "useForm"
     const {
         register,
@@ -21,9 +20,23 @@ const RegForm = (props) =>{
         mode: "onBlur"
     });
 
+    var postRegister;
+
     const onSubmit = (data) =>{
         alert(JSON.stringify(data))
         reset()
+        axios.post('', {
+            FullName: data.fullName,
+            Email: data.email,
+            Password: data.password,
+            RepeatPassword: data.repeatPassword,
+        })
+          .then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
     }
 
     return(
