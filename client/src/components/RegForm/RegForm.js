@@ -26,36 +26,37 @@ const RegForm = (props) =>{
                   {/*Input Full Name*/}
                   <input
                     {...register("fullName", {
-                        required: "Введіть своє імʼя",
+                        required: "Input your name",
                         minLength:{
                             value: 3,
-                            message: "Мінімальна кількість символів: 3"
+                            message: "Minimal amount of symbols: 3"
                         }
                     })} placeholder="Full name"/>
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.fullName && <p>{errors?.fullName?.message || 'error'}</p>}</div>
 
                   {/*Input Email*/}
                   <input
-                    {...register("email", {
-                      required: "Введіть email"
+                    {...register("Email", {
+                      required: "Input your email"
                   })} placeholder="Email" type="email" />
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.email && <p>{errors?.email?.message || 'error'}</p>}</div>
 
                   {/*Input Password*/}
-                  <input {...register("password", {
-                      required: "Введіть пароль",
+                  <input
+                      {...register("password", {
+                      required: "Input password",
                       minLength:{
                           value: 8,
-                          message: "Мінімальна кількість символів: 8"
+                          message: "Minimal amount of symbols: 8"
                       }
                   })} placeholder="Password" type="password" />
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
 
                   <input {...register("repeatPassword", {
-                      required: "Введіть пароль",
+                      required: "Input password",
                       minLength:{
                           value: 8,
-                          message: "Мінімальна кількість символів: 8"
+                          message: "Minimal amount of symbols: 8"
                       }
                   })} placeholder="Repeat password" type="password" />
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.repeatPassword && <p>{errors?.repeatPassword?.message || 'error'}</p>}</div>

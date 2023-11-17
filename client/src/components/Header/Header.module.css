@@ -54,6 +54,7 @@ nav a:hover{
         width: 1440px;
     }
     .logo {
+        margin-left: 100px;
         font-size: 46px;
     }
 }
