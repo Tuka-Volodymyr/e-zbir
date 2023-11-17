@@ -39,7 +39,7 @@ nav a:hover{
 .iconsBlock{
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
     margin-right: 100px;
 }
 .iconsBlock div{
