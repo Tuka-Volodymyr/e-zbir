@@ -3,6 +3,8 @@ import {NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 
+import CheckForm from "../ CheckForm/CheckForm";
+
 import RegFormCss from "./RegForm.module.css";
 
 
@@ -20,22 +22,21 @@ const RegForm = (props) =>{
         mode: "onBlur"
     });
 
-    var postRegister;
 
     const onSubmit = (data) =>{
-        alert(JSON.stringify(data))
         reset()
-        axios.post('', {
-            FullName: data.fullName,
-            Email: data.email,
-            Password: data.password,
-            RepeatPassword: data.repeatPassword,
+
+        axios.post('http://localhost:8080/register', {
+            username: data.fullName,
+            email: data.email,
+            password: data.password,
+            repeatPassword: data.repeatPassword,
         })
           .then(function (response) {
-              console.log(response);
+              console.log(response.status);
           })
           .catch(function (error) {
-              console.log(error);
+              alert(error.response.data.message);
           });
     }
 
@@ -48,8 +49,8 @@ const RegForm = (props) =>{
                     {...register("fullName", {
                         required: "Введіть своє імʼя",
                         minLength:{
-                            value: 3,
-                            message: "Мінімальна кількість символів: 3"
+                            value: 5,
+                            message: "Мінімальна кількість символів: 5"
                         }
                     })} placeholder="Full name"/>
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.fullName && <p>{errors?.fullName?.message || 'error'}</p>}</div>
@@ -98,3 +99,11 @@ const RegForm = (props) =>{
 };
 
 export default RegForm;
+
+// const Test = (props) => {
+//     return(
+//       <div>
+//
+//       </div>
+//     )
+// }
