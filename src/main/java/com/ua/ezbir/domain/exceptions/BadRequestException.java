@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BadRequestException extends RuntimeException {
-    public BadRequestException(String massage){
-        super(massage);
+    public BadRequestException(String message){
+        super(message);
     }
 
 }
