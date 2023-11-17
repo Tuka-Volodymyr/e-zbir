@@ -1,22 +1,29 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import axios from "axios";
 
 import RegFormCss from "./RegForm.module.css";
 
 
 const RegForm = (props) =>{
 
+    // Hook from react-hook-form "useForm"
     const {
         register,
         formState:{
             errors,
+            isValid,
         },
         handleSubmit,
-    } = useForm();
+        reset,
+    } = useForm({
+        mode: "onBlur"
+    });
 
     const onSubmit = (data) =>{
         alert(JSON.stringify(data))
+        reset()
     }
 
     return(
@@ -61,7 +68,7 @@ const RegForm = (props) =>{
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.repeatPassword && <p>{errors?.repeatPassword?.message || 'error'}</p>}</div>
 
                   {/*Submit BTN*/}
-                  <button className = {RegFormCss.loginBtn}>Registration</button>
+                  <button disabled={!isValid} className = {RegFormCss.loginBtn}>Registration</button>
 
               </form>
               <div className={RegFormCss.blockOr}>
