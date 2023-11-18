@@ -1,3 +1,4 @@
+import React from "react";
 
 import MainPageCss from './MainPage.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";

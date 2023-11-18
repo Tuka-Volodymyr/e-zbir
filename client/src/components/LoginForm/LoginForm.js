@@ -1,6 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import axios from "axios";
 
 import LoginFormCss from './Login.module.css'
 import RegFormCss from "../RegForm/RegForm.module.css";
@@ -10,12 +11,27 @@ const LoginForm = (props) =>{
         register,
         formState:{
             errors,
+            isValid,
         },
         handleSubmit,
-    } = useForm();
+        reset,
+    } = useForm({
+        mode:"onBlur"
+    });
 
     const onSubmit = (data)=>{
-        alert(JSON.stringify(data))
+        reset()
+
+        axios.post('http://localhost:8080/register',{
+            email:data.email,
+            password:data.password,
+        })
+            .then(function (response){
+                console.log(response.status);
+            })
+            .catch(function (error){
+                alert(error.response.data.message);
+            });
     }
 
     return(
@@ -25,7 +41,7 @@ const LoginForm = (props) =>{
 
                 {/*Input Email*/}
                 <input
-                    {...register("Email", {
+                    {...register("email", {
                         required:"Input your email"
                     })} placeholder="Email" type="email" />
                 <div className={LoginFormCss.errorForm} style={{height: 5}}>{errors?.email && <p>{errors?.email?.message || 'error'}</p>}</div>
@@ -40,7 +56,7 @@ const LoginForm = (props) =>{
                 })} placeholder="Password" type="password" />
                 <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
 
-                <button className = {LoginFormCss.loginBtn}>Log in</button>
+                <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>
 
             </form>
             <div className={LoginFormCss.blockOr}>

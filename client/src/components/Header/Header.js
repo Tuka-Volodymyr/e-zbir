@@ -17,13 +17,7 @@ const Header = (props) =>{
           <NavLink to='/col'>Збори</NavLink>   
           <NavLink to='/vol'>Волонтери</NavLink>
         </nav>
-
         <div className={HeaderCss.iconsBlock}>
-
-          <div className={HeaderCss.language}>
-            <img onClick={Alert} src="/img/earth.svg" alt=""/>
-          </div>
-
           <div className={HeaderCss.searchBtn}>
             <img onClick={Alert} src="/img/search.svg" alt=""/>
           </div>
