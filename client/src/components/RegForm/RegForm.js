@@ -1,22 +1,43 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import axios from "axios";
+
+import CheckForm from "../ CheckForm/CheckForm";
 
 import RegFormCss from "./RegForm.module.css";
 
 
 const RegForm = (props) =>{
-
+    // Hook from react-hook-form "useForm"
     const {
         register,
         formState:{
             errors,
+            isValid,
         },
         handleSubmit,
-    } = useForm();
+        reset,
+    } = useForm({
+        mode: "onBlur"
+    });
+
 
     const onSubmit = (data) =>{
-        alert(JSON.stringify(data))
+        reset()
+
+        axios.post('http://localhost:8080/register', {
+            username: data.fullName,
+            email: data.email,
+            password: data.password,
+            repeatPassword: data.repeatPassword,
+        })
+          .then(function (response) {
+              console.log(response.status);
+          })
+          .catch(function (error) {
+              alert(error.response.data.message);
+          });
     }
 
     return(
@@ -26,43 +47,42 @@ const RegForm = (props) =>{
                   {/*Input Full Name*/}
                   <input
                     {...register("fullName", {
-                        required: "Input your name",
+                        required: "Введіть своє імʼя",
                         minLength:{
-                            value: 3,
-                            message: "Minimal amount of symbols: 3"
+                            value: 5,
+                            message: "Мінімальна кількість символів: 5"
                         }
                     })} placeholder="Full name"/>
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.fullName && <p>{errors?.fullName?.message || 'error'}</p>}</div>
 
                   {/*Input Email*/}
                   <input
-                    {...register("Email", {
-                      required: "Input your email"
+                    {...register("email", {
+                      required: "Введіть email"
                   })} placeholder="Email" type="email" />
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.email && <p>{errors?.email?.message || 'error'}</p>}</div>
 
                   {/*Input Password*/}
-                  <input
-                      {...register("password", {
-                      required: "Input password",
+                  <input {...register("password", {
+                      required: "Введіть пароль",
                       minLength:{
                           value: 8,
-                          message: "Minimal amount of symbols: 8"
+                          message: "Мінімальна кількість символів: 8"
                       }
                   })} placeholder="Password" type="password" />
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
 
                   <input {...register("repeatPassword", {
-                      required: "Input password",
+                      required: "Введіть пароль",
                       minLength:{
                           value: 8,
-                          message: "Minimal amount of symbols: 8"
+                          message: "Мінімальна кількість символів: 8"
                       }
                   })} placeholder="Repeat password" type="password" />
                   <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.repeatPassword && <p>{errors?.repeatPassword?.message || 'error'}</p>}</div>
 
                   {/*Submit BTN*/}
-                  <button className = {RegFormCss.loginBtn}>Registration</button>
+                  <button disabled={!isValid} className = {RegFormCss.loginBtn}>Registration</button>
 
               </form>
               <div className={RegFormCss.blockOr}>
@@ -79,3 +99,11 @@ const RegForm = (props) =>{
 };
 
 export default RegForm;
+
+// const Test = (props) => {
+//     return(
+//       <div>
+//
+//       </div>
+//     )
+// }

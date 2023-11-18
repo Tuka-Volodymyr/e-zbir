@@ -13,3 +13,7 @@
     font-weight: 200;
     color: #084A16;
 }
+
+.content:hover{
+    transform: scale(1.01);
+}
