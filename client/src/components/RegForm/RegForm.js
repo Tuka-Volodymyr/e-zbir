@@ -1,14 +1,25 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import React, {useState} from "react";
+import {NavLink, Navigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 
-import CheckForm from "../ CheckForm/CheckForm";
 
 import RegFormCss from "./RegForm.module.css";
 
 
 const RegForm = (props) =>{
+
+    const dispatch = useDispatch()
+    const emailForm = useSelector(state => state.email)
+
+
+    // set HttpRequest status
+    const [status, setStatus] = useState(0)
+
+    // set Error form
+    const [error, setError] = useState('')
+
     // Hook from react-hook-form "useForm"
     const {
         register,
@@ -18,11 +29,9 @@ const RegForm = (props) =>{
         },
         handleSubmit,
         reset,
-    } = useForm({
-        mode: "onBlur"
-    });
+    } = useForm({mode: "onBlur"});
 
-
+    // POST Form to backend
     const onSubmit = (data) =>{
         reset()
 
@@ -33,77 +42,51 @@ const RegForm = (props) =>{
             repeatPassword: data.repeatPassword,
         })
           .then(function (response) {
-              console.log(response.status);
+              setStatus(response.status);
+              dispatch({type: 'SET_EMAIL', payload: data.email})
           })
           .catch(function (error) {
-              alert(error.response.data.message);
+              setError(error.response.data.message);
           });
     }
 
     return(
       <div className = {RegFormCss.content}>
+
+          <div>{status === 200 ? <Navigate to='/checkform'/> : ""}</div>{/*Redirect to checkForm*/}
+
           <div className = {RegFormCss.regBlock}>
               <form onSubmit={handleSubmit(onSubmit)} className={RegFormCss.form}>
                   {/*Input Full Name*/}
-                  <input
-                    {...register("fullName", {
-                        required: "Введіть своє імʼя",
-                        minLength:{
-                            value: 5,
-                            message: "Мінімальна кількість символів: 5"
-                        }
-                    })} placeholder="Full name"/>
-                  <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.fullName && <p>{errors?.fullName?.message || 'error'}</p>}</div>
+                  <input{...register("fullName")} placeholder="Full name"/>
 
                   {/*Input Email*/}
-                  <input
-                    {...register("email", {
-                      required: "Введіть email"
-                  })} placeholder="Email" type="email" />
-                  <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.email && <p>{errors?.email?.message || 'error'}</p>}</div>
+                  <input{...register("email")} placeholder="Email" type="email" />
 
                   {/*Input Password*/}
-                  <input {...register("password", {
-                      required: "Введіть пароль",
-                      minLength:{
-                          value: 8,
-                          message: "Мінімальна кількість символів: 8"
-                      }
-                  })} placeholder="Password" type="password" />
-                  <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
+                  <input {...register("password")} placeholder="Password" type="password" />
 
-                  <input {...register("repeatPassword", {
-                      required: "Введіть пароль",
-                      minLength:{
-                          value: 8,
-                          message: "Мінімальна кількість символів: 8"
-                      }
-                  })} placeholder="Repeat password" type="password" />
-                  <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.repeatPassword && <p>{errors?.repeatPassword?.message || 'error'}</p>}</div>
+                  {/*Input Repeat Password*/}
+                  <input {...register("repeatPassword")} placeholder="Repeat password" type="password" />
 
                   {/*Submit BTN*/}
+                  <div className={RegFormCss.errorForm}>{error}</div>
                   <button disabled={!isValid} className = {RegFormCss.loginBtn}>Registration</button>
-
               </form>
+
               <div className={RegFormCss.blockOr}>
                   <div className={RegFormCss.line}></div>
                   <p>OR</p>
                   <div className={RegFormCss.line}></div>
               </div>
+
               <div className={RegFormCss.loginLink}>
-                  <p>Have an account? <NavLink to='/'>Log In</NavLink></p>
+                  <p>Have an account? <NavLink to='/login'>Log In</NavLink></p>
               </div>
+
           </div>
       </div>
     );
 };
 
 export default RegForm;
-
-// const Test = (props) => {
-//     return(
-//       <div>
-//
-//       </div>
-//     )
-// }

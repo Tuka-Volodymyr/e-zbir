@@ -27,7 +27,7 @@ const LoginForm = (props) =>{
             password:data.password,
         })
             .then(function (response){
-                console.log(response.status);
+                console.log(response);
             })
             .catch(function (error){
                 alert(error.response.data.message);
