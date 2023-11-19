@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("Code is wrong");
         }
         User user=(User) session.getAttribute("user");
-        userRepository.save(user);
+        saveUser(user);
     }
 
     @Override
