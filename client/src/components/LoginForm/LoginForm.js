@@ -1,15 +1,63 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import axios from "axios";
 
 import LoginFormCss from './Login.module.css'
+import RegFormCss from "../RegForm/RegForm.module.css";
 const LoginForm = (props) =>{
+
+    const {
+        register,
+        formState:{
+            errors,
+            isValid,
+        },
+        handleSubmit,
+        reset,
+    } = useForm({
+        mode:"onBlur"
+    });
+
+    const onSubmit = (data)=>{
+        reset()
+
+        axios.post('http://localhost:8080/register',{
+            email:data.email,
+            password:data.password,
+        })
+            .then(function (response){
+                console.log(response);
+            })
+            .catch(function (error){
+                alert(error.response.data.message);
+            });
+    }
+
     return(
     <div className = {LoginFormCss.content}>
         <div className = {LoginFormCss.loginBlock}>
-            <form className={LoginFormCss.form}>
-                <input placeholder="Email / Phone number" type="text" />
-                <input placeholder="Password" type="text" />
-                <button className = {LoginFormCss.loginBtn}>Log in</button>
+            <form onSubmit={handleSubmit(onSubmit)} className={LoginFormCss.form}>
+
+                {/*Input Email*/}
+                <input
+                    {...register("email", {
+                        required:"Input your email"
+                    })} placeholder="Email" type="email" />
+                <div className={LoginFormCss.errorForm} style={{height: 5}}>{errors?.email && <p>{errors?.email?.message || 'error'}</p>}</div>
+
+                {/*Input Password*/}
+                <input {...register("password",{
+                    required: "Input your password",
+                    minLength:{
+                        value: 8,
+                        message: "Minimal amount of symbols: 8"
+                    }
+                })} placeholder="Password" type="password" />
+                <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
+
+                <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>
+
             </form>
             <div className={LoginFormCss.blockOr}>
                 <div className={LoginFormCss.line}></div>

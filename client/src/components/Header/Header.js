@@ -7,6 +7,7 @@ const Header = (props) =>{
   const Alert = () =>{
     alert("Ця кнопка поки не працює, працює тільки кнопка профілю")
   }
+
   return (
     <div className={HeaderCss.content}>
       <div className={HeaderCss.rectangle}>
@@ -16,7 +17,6 @@ const Header = (props) =>{
           <NavLink to='/col'>Збори</NavLink>   
           <NavLink to='/vol'>Волонтери</NavLink>
         </nav>
-
         <div className={HeaderCss.iconsBlock}>
           <div className={HeaderCss.searchBtn}>
             <img onClick={Alert} src="/img/search.svg" alt=""/>

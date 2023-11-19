@@ -1,13 +1,13 @@
 .content{
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 .loginBlock{
     background-color: #fff;
     width: 960px;
-    height: 740px;
+    height: 700px;
     border-radius: 10px;
 }
 
@@ -23,10 +23,17 @@
 }
 
 .form{
-    margin-top: 80px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.errorForm{
+    color: lightcoral;
+    font-weight: 100;
+    font-family: E-Ukraine;
+    font-size: 50px;
 }
 
 .form input{
@@ -42,6 +49,7 @@
     color: #ffffff;
     text-align: center;
     font-weight: 700;
+    border: none;
 }
 
 .blockOr{
@@ -84,4 +92,10 @@
 .regLink p a{
     color: #084A16;
     font-weight: 700;
+}
+
+@media (max-width: 1440px) {
+    .loginBlock{
+        width: 720px;
+    }
 }

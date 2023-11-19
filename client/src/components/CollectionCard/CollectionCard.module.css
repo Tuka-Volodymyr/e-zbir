@@ -1,8 +1,10 @@
 .content{
-    width: 768px;
+    width: 650px;
     height: 200px;
     background: #fff;
     margin: 10px;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .content h2{
@@ -10,8 +12,4 @@
     font-family: E-Ukraine-Head;
     font-weight: 200;
     color: #084A16;
-}
-
-.content:hover{
-    transform: scale(1.01);
 }

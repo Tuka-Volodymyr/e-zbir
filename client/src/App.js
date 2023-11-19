@@ -1,7 +1,7 @@
 import {
-  BrowserRouter,
-  Route,
-  Routes,
+    BrowserRouter,
+    Route,
+    Routes,
 } from "react-router-dom";
 
 import LoginForm from "./components/LoginForm/LoginForm";
@@ -9,7 +9,7 @@ import RegForm from "./components/RegForm/RegForm";
 import Header from "./components/Header/Header";
 import ForgPassw from "./components/ForgPassw/ForgPassw";
 import MainPage from "./components/MainPage/MainPage";
-
+import CheckForm from "./components/ CheckForm/CheckForm";
 
 import './App.css';
 
@@ -20,9 +20,12 @@ const App = (props) =>{
             {<Header />}
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/main" element={<MainPage />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegForm />} />
-              <Route path="/ver" element={<ForgPassw />} />  
+              <Route path="/checkform" element={<CheckForm />} />
+              <Route path="/ver" element={<ForgPassw />} />
+
             </Routes>
           </div>
         </BrowserRouter>
