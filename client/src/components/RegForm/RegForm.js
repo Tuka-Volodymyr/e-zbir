@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {NavLink, Navigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
 
 
 import RegFormCss from "./RegForm.module.css";
@@ -12,7 +12,6 @@ const RegForm = (props) =>{
 
     const dispatch = useDispatch()
     const emailForm = useSelector(state => state.email)
-
 
     // set HttpRequest status
     const [status, setStatus] = useState(0)
@@ -35,6 +34,8 @@ const RegForm = (props) =>{
     const onSubmit = (data) =>{
         reset()
 
+        dispatch({type:'SET_EMAIL', payload: data.email})
+
         axios.post('http://localhost:8080/register', {
             username: data.fullName,
             email: data.email,
@@ -43,7 +44,17 @@ const RegForm = (props) =>{
         })
           .then(function (response) {
               setStatus(response.status);
-              dispatch({type: 'SET_EMAIL', payload: data.email})
+
+              axios.post('http://localhost:8080/send/code?email='+`${data.email}`, {
+                  email: data.email,
+              })
+                  .then(function (response){
+                      console.log(response)
+                  })
+                  .catch(function (error){
+                      console.log(error)
+                  })
+
           })
           .catch(function (error) {
               setError(error.response.data.message);
