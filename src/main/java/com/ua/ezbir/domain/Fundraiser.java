@@ -1,11 +1,15 @@
 package com.ua.ezbir.domain;
 
-import com.ua.ezbir.web.dto.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.Category;
+import com.ua.ezbir.web.fundraiser.FundraiserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +29,8 @@ public class Fundraiser {
     private String jarLink;
     private String description;
     private boolean isClosed;
-
+    private LocalDateTime currentDateTime;
+    private List<Category> categories;
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
                 .jarLink(getJarLink())

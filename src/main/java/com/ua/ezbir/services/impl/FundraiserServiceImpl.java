@@ -6,11 +6,12 @@ import com.ua.ezbir.domain.exceptions.FundraiserNotFoundException;
 import com.ua.ezbir.repository.FundraiserRepository;
 import com.ua.ezbir.services.FundraiserService;
 import com.ua.ezbir.services.UserService;
-import com.ua.ezbir.web.dto.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.FundraiserDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,6 +31,8 @@ public class FundraiserServiceImpl implements FundraiserService {
                 .jarLink(fundraiserDto.getJarLink())
                 .description(fundraiserDto.getDescription())
                 .isClosed(false)
+                .categories(fundraiserDto.getCategories())
+                .currentDateTime(LocalDateTime.now())
                 .build();
 
         // save fundraiser in db
@@ -70,6 +73,7 @@ public class FundraiserServiceImpl implements FundraiserService {
         fundraiser.setDescription(redactedFundraiserDto.getDescription());
         fundraiser.setName(redactedFundraiserDto.getName());
         fundraiser.setJarLink(redactedFundraiserDto.getJarLink());
+        fundraiser.setCategories(redactedFundraiserDto.getCategories());
         fundraiserRepository.save(fundraiser);
     }
 }

@@ -1,8 +1,10 @@
-package com.ua.ezbir.web.dto;
+package com.ua.ezbir.web.fundraiser;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -15,4 +17,7 @@ public class FundraiserDto {
 
     @NotBlank(message = "Description should not be empty!")
     private String description;
+
+    @NotBlank(message = "Categories should not be empty!")
+    private List<Category> categories;
 }

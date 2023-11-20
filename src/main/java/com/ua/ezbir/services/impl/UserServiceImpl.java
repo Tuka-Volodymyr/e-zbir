@@ -5,7 +5,7 @@ import com.ua.ezbir.domain.exceptions.BadRequestException;
 import com.ua.ezbir.domain.exceptions.UserNotFoundException;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
-import com.ua.ezbir.web.dto.CodeDto;
+import com.ua.ezbir.web.code.CodeDto;
 import com.ua.ezbir.web.user.UserDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Optional;
 
@@ -66,6 +67,7 @@ public class UserServiceImpl implements UserService {
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .fundraiserList(new LinkedList<>())
+                .currentDateTime(LocalDateTime.now())
                 .build();
         session.setAttribute("user",user);
     }

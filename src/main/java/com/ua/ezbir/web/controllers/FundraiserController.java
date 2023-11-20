@@ -1,7 +1,7 @@
 package com.ua.ezbir.web.controllers;
 
 import com.ua.ezbir.services.FundraiserService;
-import com.ua.ezbir.web.dto.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.FundraiserDto;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

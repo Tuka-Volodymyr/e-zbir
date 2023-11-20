@@ -1,7 +1,6 @@
 package com.ua.ezbir.services;
 
-import com.ua.ezbir.domain.Fundraiser;
-import com.ua.ezbir.web.dto.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.FundraiserDto;
 import jakarta.servlet.http.HttpSession;
 
 public interface FundraiserService {

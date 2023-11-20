@@ -19,9 +19,8 @@ import java.io.IOException;
 public class UserController {
     private final UserService userService;
     @GetMapping("/user")
-    public ResponseEntity<?> getUser(@RequestParam("id") Long id) {
-        User user = userService.getUserById(id);
-
+    public ResponseEntity<?> getUser() {
+        User user = userService.getUser();
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

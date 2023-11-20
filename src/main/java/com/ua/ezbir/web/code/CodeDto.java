@@ -1,4 +1,4 @@
-package com.ua.ezbir.web.dto;
+package com.ua.ezbir.web.code;
 
 import lombok.Data;
 
