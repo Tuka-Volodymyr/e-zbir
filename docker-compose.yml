@@ -23,5 +23,13 @@ services:
     depends_on:
       - postgres
 
+  front-app:
+    build: ./client
+    container_name: e-zbir-front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - spring-boot-app
+
 volumes:
   postgres-data:
