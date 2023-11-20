@@ -18,6 +18,6 @@ public class FundraiserDto {
     @NotBlank(message = "Description should not be empty!")
     private String description;
 
-    @NotBlank(message = "Categories should not be empty!")
-    private List<Category> categories;
+//    @NotBlank(message = "Categories should not be empty!")
+    private List<String> categories;
 }
