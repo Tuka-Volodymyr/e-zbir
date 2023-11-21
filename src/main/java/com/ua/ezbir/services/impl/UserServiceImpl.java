@@ -7,8 +7,10 @@ import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.code.CodeDto;
 import com.ua.ezbir.web.user.UserDto;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -73,23 +75,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendCodeToEmail(String email, HttpSession session) {
-        CodeDto code=new CodeDto();
+    public void sendCodeToEmail(String email, HttpServletRequest request) {
+        CodeDto code = new CodeDto();
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Password Reset");
-        message.setText("Code: "+code.getCode());
-        session.setAttribute("code",code.getCode());
+        message.setText("Code: "+ code.getCode());
+        request.getSession().setAttribute("code", code.getCode());
+        System.out.println("send to email: " + code.getCode());
         javaMailSender.send(message);
     }
 
     @Override
-    public void checkCode(String code,HttpSession session) {
-        String correctCode= (String) session.getAttribute("code");
+    public void checkCode(String code, HttpServletRequest request) {
+        String correctCode = (String) request.getSession().getAttribute("code");
+        System.out.println("check code: " + correctCode);
         if(!code.equals(correctCode)){
             throw new BadRequestException("Code is wrong");
         }
-        User user=(User) session.getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         saveUser(user);
     }
 

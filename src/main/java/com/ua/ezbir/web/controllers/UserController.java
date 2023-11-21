@@ -3,6 +3,7 @@ package com.ua.ezbir.web.controllers;
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.user.UserDto;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -32,14 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/send/code")
-    public ResponseEntity<String> sendCode(@RequestParam("email") String email,HttpSession session) {
-        userService.sendCodeToEmail(email,session);
+    public ResponseEntity<String> sendCode(@RequestParam("email") String email, HttpServletRequest request) {
+        userService.sendCodeToEmail(email, request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/check/code")
-    public ResponseEntity<String> checkCode(@RequestParam("code") String code, HttpSession session) {
-        userService.checkCode(code,session);
+    public ResponseEntity<String> checkCode(@RequestParam("code") String code, HttpServletRequest request) {
+        userService.checkCode(code, request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
