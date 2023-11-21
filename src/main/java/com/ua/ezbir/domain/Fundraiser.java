@@ -30,12 +30,14 @@ public class Fundraiser {
     private String description;
     private boolean isClosed;
     private LocalDateTime currentDateTime;
-    private List<Category> categories;
+    @ElementCollection
+    private List<String> categories;
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
                 .jarLink(getJarLink())
                 .name(getName())
                 .description(getDescription())
+                .categories(getCategories())
                 .build();
     }
 }
