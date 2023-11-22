@@ -1,4 +1,4 @@
-package com.ua.ezbir.domain;
+package com.ua.ezbir.domain.security;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

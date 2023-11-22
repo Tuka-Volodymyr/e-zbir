@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/fundraiser")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class FundraiserController {
     private final FundraiserService fundraiserService;
+    private final HttpSession session;
 
     @PostMapping("/add")
     public ResponseEntity<String> addFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
@@ -26,11 +28,11 @@ public class FundraiserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/get/redact")
-    public ResponseEntity<?> getRedactFundraiser(@RequestParam("id") long id, HttpSession session) {
+    public ResponseEntity<?> getRedactFundraiser(@RequestParam("id") long id) {
         return new ResponseEntity<>(fundraiserService.getRedactFundraiser(id,session),HttpStatus.OK);
     }
     @PostMapping("/redact")
-    public ResponseEntity<String> redactFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto, HttpSession session) {
+    public ResponseEntity<String> redactFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
         fundraiserService.redactFundraiser(fundraiserDto,session);
         return new ResponseEntity<>(HttpStatus.OK);
     }

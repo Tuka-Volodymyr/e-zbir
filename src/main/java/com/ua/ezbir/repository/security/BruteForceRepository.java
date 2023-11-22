@@ -1,7 +1,6 @@
-package com.ua.ezbir.repository;
+package com.ua.ezbir.repository.security;
 
-import com.ua.ezbir.domain.BruteForce;
-import com.ua.ezbir.domain.Fundraiser;
+import com.ua.ezbir.domain.security.BruteForce;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

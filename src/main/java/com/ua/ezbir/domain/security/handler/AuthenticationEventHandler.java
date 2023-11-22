@@ -1,22 +1,15 @@
-package com.ua.ezbir.handler;
+package com.ua.ezbir.domain.security.handler;
 
-import com.ua.ezbir.domain.BruteForce;
-import com.ua.ezbir.domain.exceptions.BruteForceException;
-import com.ua.ezbir.repository.BruteForceRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ua.ezbir.domain.security.BruteForce;
+import com.ua.ezbir.repository.security.BruteForceRepository;
 import org.springframework.context.event.EventListener;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Component
