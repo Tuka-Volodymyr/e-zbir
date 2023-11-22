@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    container_name: e-zbir-postgres-container
+    container_name: postgres
     environment:
       - POSTGRES_DB=${POSTGRES_DATABASE}
       - POSTGRES_USER=${POSTGRES_USERNAME}
@@ -13,9 +13,11 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  spring-boot-app:
-    build: .
-    container_name: e-zbir-spring-boot
+  client-backend:
+    image: backend:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
     env_file:
       - .env
     ports:
@@ -23,11 +25,15 @@ services:
     depends_on:
       - postgres
 
-  front-app:
+  client-frontend:
+    image: frontend:0.0.1
     build: ./client
-    container_name: e-zbir-front
+    restart: always
     ports:
       - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - ./client:/app
 
 volumes:
   postgres-data:

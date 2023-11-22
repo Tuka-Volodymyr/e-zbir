@@ -7,10 +7,8 @@ import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.code.CodeDto;
 import com.ua.ezbir.web.user.UserDto;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -59,12 +57,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerNewUser(UserDto userDto,HttpSession session) {
         Optional<User> userExist = userRepository.findByEmail(userDto.getEmail());
-        if(!userDto.getPassword().equals(userDto.getRepeatPassword())){
-            throw new BadRequestException("Password don`t match");
-        }else if(userExist.isPresent()){
+        if (!userDto.getPassword().equals(userDto.getRepeatPassword())){
+            throw new BadRequestException("Password doesn't match");
+        } else if(userExist.isPresent()){
             throw new BadRequestException("Email has already used");
         }
-        User user=User.builder()
+
+        User user = User.builder()
                 .username(userDto.getUsername())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
@@ -75,26 +74,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendCodeToEmail(String email, HttpServletRequest request) {
-        CodeDto code = new CodeDto();
+    public void sendCodeToEmail(String email, HttpSession session) {
+        CodeDto codeDto = new CodeDto(); // auto-generated code
+
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("Password Reset");
-        message.setText("Code: "+ code.getCode());
-        request.getSession().setAttribute("code", code.getCode());
-        System.out.println("send to email: " + code.getCode());
+        message.setSubject("[Є-Збір] Будь ласка, підтвердіть вашу електронну адресу");
+        message.setText("""
+                Дякуємо за регістрацію на Є-Збір! Код для підтвердження:\s
+                """ + codeDto.getCode());
         javaMailSender.send(message);
+
+        session.setAttribute("code", codeDto.getCode());
     }
 
     @Override
-    public void checkCode(String code, HttpServletRequest request) {
-        String correctCode = (String) request.getSession().getAttribute("code");
-        System.out.println("check code: " + correctCode);
-        if(!code.equals(correctCode)){
+    public void checkCode(String userCode, HttpSession session) {
+        String code = (String) session.getAttribute("code");
+        if (!code.equals(userCode)) {
             throw new BadRequestException("Code is wrong");
         }
-        User user = (User) request.getSession().getAttribute("user");
-        saveUser(user);
+
+        User user = (User) session.getAttribute("user");
+        saveUser(user); // save user in db
     }
 
     @Override

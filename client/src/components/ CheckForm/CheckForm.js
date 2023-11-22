@@ -23,6 +23,8 @@ const CheckForm = (props) =>{
 
         axios.post('http://localhost:8080/check/code?code=' + `${data.code}`,{
             code: data.code,
+        }, {
+            withCredentials: true // Дозволяє передачу сесійних куки
         })
             .then((response) => {
                 console.log(response)
