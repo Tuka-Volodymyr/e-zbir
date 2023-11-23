@@ -26,7 +26,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register","/send/code","/check/code","/error/**").permitAll()
+                        .requestMatchers("/", "/register","/send/code","/check/code","/error/**",
+                                "/change/password/send/code","/change/password/check/code","/change/password").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")

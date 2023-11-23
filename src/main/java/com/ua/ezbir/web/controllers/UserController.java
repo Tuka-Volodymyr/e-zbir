@@ -1,6 +1,7 @@
 package com.ua.ezbir.web.controllers;
 
 import com.ua.ezbir.services.UserService;
+import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -32,20 +33,41 @@ public class UserController {
     }
 
     @PostMapping("/send/code")
-    public ResponseEntity<?> sendCode(@RequestParam("email") String email) {
-        userService.sendCodeToEmail(email, session);
+    public ResponseEntity<?> sendCodeForVerification(@RequestParam("email") String email) {
+        userService.sendCodeToEmailForVerification(email, session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/check/code")
-    public ResponseEntity<?> checkCode(@RequestParam("code") String code) {
-        userService.checkCode(code, session);
+    public ResponseEntity<?> checkCodeForVerification(@RequestParam("code") String code) {
+        userService.checkCodeVerification(code, session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(path = "/user/add/photo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> addPhoto(@RequestParam(value = "photo") MultipartFile file) throws IOException {
+    public ResponseEntity<?> addPhoto(@RequestParam("file") MultipartFile file) throws IOException {
         userService.addPhoto(file);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/user/add/info")
+    public ResponseEntity<?> addInfo(@RequestParam("info") String info) {
+        userService.addInfoAboutYourself(info);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/change/password/send/code")
+    public ResponseEntity<?> sendCodeForChangePassword(@RequestParam("email") String email) {
+        userService.sendCodeToEmailForChangePassword(email, session);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/change/password/check/code")
+    public ResponseEntity<?> checkCodeForChangePassword(@RequestParam("code") String code) {
+        userService.checkCodeForChangePassword(code, session);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/change/password")
+    public ResponseEntity<?> changePassword(@RequestBody @Valid PasswordDto passwordDto){
+        userService.changePassword(passwordDto,session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
