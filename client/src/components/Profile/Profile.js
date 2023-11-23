@@ -1,6 +1,8 @@
 import ProfileCss from './Profile.module.css'
-import {Avatar} from "@mui/material";
+ import {Avatar} from "@mui/material";
 import CollectionCard from "../CollectionCard/CollectionCard";
+
+
 
 const Profile = (props) =>{
     return(
