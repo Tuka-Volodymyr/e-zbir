@@ -3,10 +3,12 @@ import ProfileCss from './Profile.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";
 
 
+
 const Profile = (props) =>{
     return(
     <div className = {ProfileCss.content}>
         <div className={ProfileCss.profile}>
+
             <p>Гембара Тарас</p>
             <p></p>
         </div>
