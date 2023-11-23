@@ -1,0 +1,21 @@
+.content{
+    display: grid;
+    grid-template-rows: 300px 1fr;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.profile{
+
+}
+
+.userCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userCard h1{
+    font-family: E-Ukraine-Head;
+    font-size: 30px;
+    font-weight: 200;
+}

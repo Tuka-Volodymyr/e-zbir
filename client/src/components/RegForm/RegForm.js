@@ -45,7 +45,7 @@ const RegForm = (props) =>{
           .then(function (response) {
               setStatus(response.status);
 
-              axios.post('http://localhost:8080/send/code?email='+`${data.email}`, {
+              axios.post(`http://localhost:8080/send/code?email=${data.email}`, {
                   email: data.email,
               })
                   .then(function (response){
