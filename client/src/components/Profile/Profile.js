@@ -1,14 +1,12 @@
 import ProfileCss from './Profile.module.css'
- import {Avatar} from "@mui/material";
-import CollectionCard from "../CollectionCard/CollectionCard";
 
+import CollectionCard from "../CollectionCard/CollectionCard";
 
 
 const Profile = (props) =>{
     return(
     <div className = {ProfileCss.content}>
         <div className={ProfileCss.profile}>
-            <Avatar sx={{ width: 192, height: 192 }} variant="square" alt="" src="/logo512.png"></Avatar>
             <p>Гембара Тарас</p>
             <p></p>
         </div>
