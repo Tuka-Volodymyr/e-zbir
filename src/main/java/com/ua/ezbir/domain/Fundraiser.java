@@ -20,7 +20,7 @@ import java.util.List;
 public class Fundraiser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long fundraiserId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,6 +32,8 @@ public class Fundraiser {
     private LocalDateTime currentDateTime;
     @ElementCollection
     private List<String> categories;
+    @OneToMany(mappedBy = "fundraiser")
+    private List<Post> posts;
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
                 .jarLink(getJarLink())

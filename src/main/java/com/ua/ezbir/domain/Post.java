@@ -1,7 +1,6 @@
 package com.ua.ezbir.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,19 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "users")
-public class User {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
-    private String email;
-    private String username;
-    private String password;
-    private String infoAboutYourself;
-    @Column(length = 10000000)
-    private byte[] bytePhoto;
-
-    @OneToMany(mappedBy = "user")
-    private List<Fundraiser> fundraiserList;
+    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "fundraiser_id")
+    private Fundraiser fundraiser;
+    @ElementCollection
+    @Column(length =  100000000)
+    private List<byte[]> listPhoto;
+    private String text;
     private LocalDateTime currentDateTime;
+    //will add comment and like or som else
 }
