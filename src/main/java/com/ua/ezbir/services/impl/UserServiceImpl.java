@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public List<User> searchUsers(String keyword) {
+        return userRepository.findByUsernameContainingIgnoreCase(keyword);
     }
 
     public User getUserByEmail(String email){return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);}
@@ -122,12 +128,14 @@ public class UserServiceImpl implements UserService {
         user.setBytePhoto(photoBytes);
         saveUser(user);
     }
+
     @Override
     public void addInfoAboutYourself(String data) {
         User user=getUser();
         user.setInfoAboutYourself(data);
         saveUser(user);
     }
+
     @Override
     public void sendCodeToEmailForChangePassword(String email, HttpSession session) {
         CodeDto codeDto = new CodeDto(); // auto-generated code

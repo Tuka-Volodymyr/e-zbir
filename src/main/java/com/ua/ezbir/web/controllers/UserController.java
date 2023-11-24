@@ -1,5 +1,6 @@
 package com.ua.ezbir.web.controllers;
 
+import com.ua.ezbir.domain.User;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +22,11 @@ import java.io.IOException;
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
+
+    @GetMapping("/user/search")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam("keyword") String keyword) {
+        return new ResponseEntity<>(userService.searchUsers(keyword), HttpStatus.OK);
+    }
 
     @GetMapping("/user")
     public ResponseEntity<?> getUser(@RequestParam("id") Long id) {

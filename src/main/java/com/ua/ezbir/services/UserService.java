@@ -7,10 +7,14 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface UserService {
     User getUserById(Long id);
+
     User getUser();
+
+    List<User> searchUsers(String keyword);
 
     void codesIsEquals(String code, String inputCode);
 
@@ -26,7 +30,10 @@ public interface UserService {
     void changePassword(PasswordDto passwordDto,HttpSession session);
 
     void checkCodeVerification(String code, HttpSession session);
+
     void addPhoto(MultipartFile file) throws IOException;
+
     void addInfoAboutYourself(String data);
+
     void saveUser(User user);
 }
