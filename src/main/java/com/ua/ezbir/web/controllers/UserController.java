@@ -1,5 +1,6 @@
 package com.ua.ezbir.web.controllers;
 
+import com.ua.ezbir.config.UserAuthenticationProvider;
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.user.LoginRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -52,9 +54,8 @@ public class UserController {
     }
 
     @PostMapping("/check/code")
-    public ResponseEntity<?> checkCodeForVerification(@RequestParam("code") String code) {
-        userService.checkCodeVerification(code, session);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<UserResponse> checkCodeForVerification(@RequestParam("code") String code) {
+        return new ResponseEntity<>(userService.checkCodeVerification(code, session),HttpStatus.OK);
     }
 
     @PostMapping(path = "/user/add/photo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

@@ -8,5 +8,6 @@ public record UserResponse(
         String username,
         String infoAboutYourself,
         String bytePhoto,
-        List<Fundraiser> fundraiserList
+        List<Fundraiser> fundraiserList,
+        String token
 ) {}

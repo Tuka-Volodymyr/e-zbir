@@ -1,5 +1,10 @@
 package com.ua.ezbir.services.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ua.ezbir.config.UserAuthenticationProvider;
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.domain.exceptions.BadRequestException;
 import com.ua.ezbir.domain.exceptions.UnauthorizedException;
@@ -15,6 +20,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,10 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Base64;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,15 +38,19 @@ public class UserServiceImpl implements UserService {
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final UserAuthenticationProvider userAuthenticationProvider;
+
 
     @Override
     public UserResponse login(LoginRequest request) {
+        String base64Image = null;
         Optional<User> userOptional = validUsernameAndPassword(request.getUsername(), request.getPassword());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            String base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
+            if(user.getBytePhoto()!=null)
+                base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
             return new UserResponse(user.getUsername(), user.getInfoAboutYourself(),
-                    base64Image, user.getFundraiserList());
+                    base64Image, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getUsername()));
         } else {
             throw new UnauthorizedException();
         }
@@ -133,13 +141,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void checkCodeVerification(String userCode, HttpSession session) {
+    public UserResponse checkCodeVerification(String userCode, HttpSession session) {
         String code = (String) session.getAttribute("codeVerification");
         codesIsEquals(code,userCode);
-        if(session.getAttribute("user")!=null){
-            User user = (User) session.getAttribute("user");
-            saveUser(user); // save user in db
-        }
+        User user = (User) session.getAttribute("user");
+        saveUser(user); // save user in db
+        return new UserResponse(user.getUsername(), user.getInfoAboutYourself(),
+                null, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getUsername()));
+
     }
 
     @Override

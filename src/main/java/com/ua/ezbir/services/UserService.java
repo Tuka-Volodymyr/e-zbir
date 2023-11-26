@@ -39,7 +39,7 @@ public interface UserService {
 
     void changePassword(PasswordDto passwordDto,HttpSession session);
 
-    void checkCodeVerification(String code, HttpSession session);
+    UserResponse checkCodeVerification(String code, HttpSession session);
 
     void addPhoto(MultipartFile file) throws IOException;
 
