@@ -76,4 +76,9 @@ public class FundraiserServiceImpl implements FundraiserService {
         fundraiser.setCategories(redactedFundraiserDto.getCategories());
         fundraiserRepository.save(fundraiser);
     }
+
+    @Override
+    public List<Fundraiser> searchFundraisers(String keyword) {
+        return fundraiserRepository.findByNameContainingIgnoreCase(keyword);
+    }
 }
