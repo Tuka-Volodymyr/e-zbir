@@ -1,5 +1,9 @@
+.content{
+    width: 90%;
+    margin: 0 auto;
+}
+
 .search{
-    width: 80%;
     height: 50px;
     background: #fff;
     margin: 0 auto;
@@ -26,18 +30,12 @@
     font-weight: 200;
     margin-top: 15px;
 }
-
-.container {
+.zbirList{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 70px;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
 
-.UpCards,
-.DownCards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
+
 

@@ -22,7 +22,7 @@ const LoginForm = (props) =>{
     const onSubmit = (data)=>{
         reset()
 
-        axios.post('http://localhost:8080/register',{
+        axios.post('http://localhost:8080/login',{
             email:data.email,
             password:data.password,
         })
@@ -30,7 +30,7 @@ const LoginForm = (props) =>{
                 console.log(response);
             })
             .catch(function (error){
-                alert(error.response.data.message);
+                alert(error);
             });
     }
 
@@ -50,8 +50,8 @@ const LoginForm = (props) =>{
                 <input {...register("password",{
                     required: "Input your password",
                     minLength:{
-                        value: 8,
-                        message: "Minimal amount of symbols: 8"
+                        value: 6,
+                        message: "Minimal amount of symbols: 6"
                     }
                 })} placeholder="Password" type="password" />
                 <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>

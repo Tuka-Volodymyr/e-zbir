@@ -1,0 +1,40 @@
+.content{
+    display: grid;
+    grid-template-rows: 300px 1fr;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.profile{
+    display: flex;
+    margin-top: 20px;
+}
+.userInfo{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+.username{
+    font-size: 28px;
+}
+.email{
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.settings{
+    width: 100%;
+    text-align: end;
+}
+
+.userCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userCard h1{
+    font-family: E-Ukraine-Head;
+    font-size: 30px;
+    font-weight: 200;
+}
