@@ -41,13 +41,13 @@ const RegForm = (props) =>{
             email: data.email,
             password: data.password,
             repeatPassword: data.repeatPassword,
-        })
+        },{withCredentials: true /* Дозволяє передачу сесійних куки */})
           .then(function (response) {
               setStatus(response.status);
 
               axios.post('http://localhost:8080/send/code?email='+`${data.email}`, {
                   email: data.email,
-              })
+              },{withCredentials: true /* Дозволяє передачу сесійних куки */})
                   .then(function (response){
                       console.log(response)
                   })
