@@ -6,7 +6,26 @@
 }
 
 .profile{
+    display: flex;
+    margin-top: 20px;
+}
+.userInfo{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+.username{
+    font-size: 28px;
+}
+.email{
+    margin-top: 10px;
+    font-size: 12px;
+}
 
+.settings{
+    width: 100%;
+    text-align: end;
 }
 
 .userCard{

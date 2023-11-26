@@ -4,7 +4,7 @@ import MainPageCss from './MainPage.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";
 const MainPage = (props) =>{
     return(
-    <div className = "">
+    <div className = {MainPageCss.content}>
         <div className={MainPageCss.search}>
             <input placeholder='Назва збору, імʼя волонтера || На машину, Іван Петрович' type="search"/>
             <img src="/img/search.svg" alt=""/>
