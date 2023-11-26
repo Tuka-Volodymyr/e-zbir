@@ -30,7 +30,7 @@ const LoginForm = (props) =>{
                 console.log(response);
             })
             .catch(function (error){
-                alert(error);
+                console.log(error);
             });
     }
 
@@ -53,7 +53,7 @@ const LoginForm = (props) =>{
                         value: 6,
                         message: "Minimal amount of symbols: 6"
                     }
-                })} placeholder="Password" type="password" />
+                })} placeholder="Password" type="password" autoComplete='on'  />
                 <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
 
                 <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>
