@@ -1,15 +1,24 @@
 package com.ua.ezbir.services;
 
 import com.ua.ezbir.domain.User;
+import com.ua.ezbir.web.user.LoginRequest;
 import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
+import com.ua.ezbir.web.user.UserResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
+    UserResponse login(LoginRequest loginRequest);
+
+    Optional<User> getUserByEmail(String email);
+
+    Optional<User> validUsernameAndPassword(String username, String password);
+
     User getUserById(Long id);
 
     User getUser();
@@ -23,6 +32,7 @@ public interface UserService {
     void passwordsIsEquals(String password, String repeatPassword);
 
     void sendCodeToEmailForVerification(String email, HttpSession session);
+
     void sendCodeToEmailForChangePassword(String email, HttpSession session);
 
     void checkCodeForChangePassword(String userCode, HttpSession session);

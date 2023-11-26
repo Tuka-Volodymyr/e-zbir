@@ -2,12 +2,15 @@ package com.ua.ezbir.services.impl;
 
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.domain.exceptions.BadRequestException;
+import com.ua.ezbir.domain.exceptions.UnauthorizedException;
 import com.ua.ezbir.domain.exceptions.UserNotFoundException;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.code.CodeDto;
+import com.ua.ezbir.web.user.LoginRequest;
 import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
+import com.ua.ezbir.web.user.UserResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -32,17 +35,32 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
+    public UserResponse login(LoginRequest request) {
+        Optional<User> userOptional = validUsernameAndPassword(request.getUsername(), request.getPassword());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return new UserResponse(user.getUsername(), user.getInfoAboutYourself(),
+                    user.getBytePhoto(), user.getFundraiserList());
+        } else {
+            throw new UnauthorizedException();
+        }
+    }
+
+    @Override
+    public Optional<User> validUsernameAndPassword(String username, String password) {
+        return getUserByEmail(username)
+                .filter(user -> passwordEncoder.matches(password, user.getPassword()));
+    }
+
+    @Override
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
-    public List<User> searchUsers(String keyword) {
-        return userRepository.findByUsernameContainingIgnoreCase(keyword);
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
-
-    public User getUserByEmail(String email){return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);}
-
 
     @Override
     public User getUser() {
@@ -63,12 +81,14 @@ public class UserServiceImpl implements UserService {
             throw new NullPointerException();
         }
     }
+
     @Override
     public void passwordsIsEquals(String password,String repeatPassword) {
         if (!password.equals(repeatPassword)) {
             throw new BadRequestException("Password doesn't match");
         }
     }
+
     @Override
     public void codesIsEquals(String code,String inputCode){
         if (!code.equals(inputCode))
@@ -76,10 +96,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerNewUser(UserDto userDto,HttpSession session) {
+    public void registerNewUser(UserDto userDto, HttpSession session) {
         Optional<User> userExist = userRepository.findByEmail(userDto.getEmail());
         passwordsIsEquals(userDto.getPassword(),userDto.getRepeatPassword());
-        if(userExist.isPresent()){
+        if(userExist.isPresent()) {
             throw new BadRequestException("Email has already used");
         }
 
@@ -92,6 +112,7 @@ public class UserServiceImpl implements UserService {
                 .build();
         session.setAttribute("user",user);
     }
+
     @Override
     public void sendCodeToEmailForVerification(String email, HttpSession session) {
         CodeDto codeDto = new CodeDto(); // auto-generated code
@@ -161,9 +182,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(PasswordDto passwordDto,HttpSession session) {
         passwordsIsEquals(passwordDto.getPassword(), passwordDto.getRepeatPassword());
-        String email=(String) session.getAttribute("userEmailChangePassword");
-        User user =getUserByEmail(email);
+        String email = (String) session.getAttribute("userEmailChangePassword");
+        User user = getUserByEmail(email).orElseThrow(UserNotFoundException::new);
         user.setPassword(passwordEncoder.encode(passwordDto.getPassword()));
         saveUser(user);
+    }
+
+    @Override
+    public List<User> searchUsers(String keyword) {
+        return userRepository.findByUsernameContainingIgnoreCase(keyword);
     }
 }

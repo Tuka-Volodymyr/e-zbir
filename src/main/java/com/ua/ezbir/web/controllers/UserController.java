@@ -2,8 +2,10 @@ package com.ua.ezbir.web.controllers;
 
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.services.UserService;
+import com.ua.ezbir.web.user.LoginRequest;
 import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
+import com.ua.ezbir.web.user.UserResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,25 +25,24 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/user/search")
-    public ResponseEntity<List<User>> searchUsers(@RequestParam("keyword") String keyword) {
-        return new ResponseEntity<>(userService.searchUsers(keyword), HttpStatus.OK);
-    }
-
-    @GetMapping("/user")
-    public ResponseEntity<?> getUser(@RequestParam("id") Long id) {
-        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+    @PostMapping("/login")
+    public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest request) {
+        return new ResponseEntity<>(userService.login(request), HttpStatus.OK);
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid UserDto userDto) {
         userService.registerNewUser(userDto, session);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/user")
+    public ResponseEntity<?> getUser(@RequestParam("id") Long id) {
+        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/search")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam("keyword") String keyword) {
+        return new ResponseEntity<>(userService.searchUsers(keyword), HttpStatus.OK);
     }
 
     @PostMapping("/send/code")
