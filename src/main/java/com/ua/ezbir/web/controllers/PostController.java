@@ -16,7 +16,6 @@ import java.io.IOException;
 @RequestMapping("/post")
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class PostController {
-    private final PostRepository postRepository;
     private final PostService postService;
 
     @PostMapping("/add")
