@@ -52,6 +52,18 @@
     border: none;
 }
 
+.logoutBtn{
+    margin-top: 40px;
+    width: 50%;
+    height: 75px;
+    border-radius: 10px;
+    background: #a44646;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    border: none;
+}
+
 .blockOr{
     display: flex;
     width: 80%;
