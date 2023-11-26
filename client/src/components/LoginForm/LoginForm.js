@@ -73,12 +73,12 @@ const LoginForm = (props) =>{
                 <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
 
 
-                {status == 0 ? <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>  :  ""}
+                {status === 0 ? <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>  :  ""}
 
 
             </form>
 
-            {status == 200 ? <button onClick={Logout} className = {LoginFormCss.logoutBtn}>Log out</button>  :  ""}
+            {status === 200 ? <button onClick={Logout} className = {LoginFormCss.logoutBtn}>Log out</button>  :  ""}
 
 
 
