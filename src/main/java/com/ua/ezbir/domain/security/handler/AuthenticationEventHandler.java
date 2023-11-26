@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain.security.handler;
 
+import com.ua.ezbir.domain.exceptions.BruteForceException;
 import com.ua.ezbir.domain.security.BruteForce;
 import com.ua.ezbir.repository.security.BruteForceRepository;
 import org.springframework.context.event.EventListener;
@@ -29,7 +30,7 @@ public class AuthenticationEventHandler {
         if(bruteForceOptional.isPresent()){
             BruteForce bruteForce=bruteForceOptional.get();
             if(bruteForce.isLock()){
-                return;
+                throw new BruteForceException();
             }
             bruteForce.successAttempts();
             bruteForceRepository.save(bruteForce);
@@ -45,7 +46,7 @@ public class AuthenticationEventHandler {
             if(bruteForceOptional.isPresent()){
                 bruteForce=bruteForceOptional.get();
                 if(bruteForce.isLock()){
-                    return;
+                    throw new BruteForceException();
                 }
                 bruteForce.addFailAttempts();
                 if(bruteForce.getFailAttempts()>=MAX_ATTEMPTS){
