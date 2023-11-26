@@ -23,6 +23,11 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("/user/search")
     public ResponseEntity<List<User>> searchUsers(@RequestParam("keyword") String keyword) {
         return new ResponseEntity<>(userService.searchUsers(keyword), HttpStatus.OK);
