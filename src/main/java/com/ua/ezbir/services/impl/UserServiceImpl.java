@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +40,9 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = validUsernameAndPassword(request.getUsername(), request.getPassword());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            String base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
             return new UserResponse(user.getUsername(), user.getInfoAboutYourself(),
-                    user.getBytePhoto(), user.getFundraiserList());
+                    base64Image, user.getFundraiserList());
         } else {
             throw new UnauthorizedException();
         }

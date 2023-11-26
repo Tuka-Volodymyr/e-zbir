@@ -4,5 +4,9 @@ import com.ua.ezbir.domain.Fundraiser;
 
 import java.util.List;
 
-public record UserResponse(String username, String infoAboutYourself, byte[] bytePhoto, List<Fundraiser> fundraiserList) {
-}
+public record UserResponse(
+        String username,
+        String infoAboutYourself,
+        String bytePhoto,
+        List<Fundraiser> fundraiserList
+) {}
