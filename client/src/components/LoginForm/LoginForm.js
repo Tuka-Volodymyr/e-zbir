@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+
 import {NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
@@ -7,7 +7,12 @@ import LoginFormCss from './Login.module.css'
 import RegFormCss from "../RegForm/RegForm.module.css";
 const LoginForm = (props) =>{
 
-    const [status, setStatus] = useState(0)
+    const getAuthToken = () =>{
+        return window.localStorage.getItem('auth_token')
+    }
+    const setAuthToken = (token) =>{
+        window.localStorage.setItem('auth_token', token)
+    }
 
     const {
         register,
@@ -29,8 +34,8 @@ const LoginForm = (props) =>{
             password:data.password,
         },{withCredentials: true /* Дозволяє передачу сесійних куки */})
             .then(function (response){
-                setStatus(response.status)
                 console.log(response);
+                setAuthToken(response.data.token)
             })
             .catch(function (error){
                 console.log(error);
@@ -73,12 +78,11 @@ const LoginForm = (props) =>{
                 <div className={RegFormCss.errorForm} style={{height: 5}}>{errors?.password && <p>{errors?.password?.message || 'error'}</p>}</div>
 
 
-                {status === 0 ? <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>  :  ""}
+                <button disabled={!isValid} className = {LoginFormCss.loginBtn}>Log in</button>
 
 
             </form>
 
-            {status === 200 ? <button onClick={Logout} className = {LoginFormCss.logoutBtn}>Log out</button>  :  ""}
 
 
 
