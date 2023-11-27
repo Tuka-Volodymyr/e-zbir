@@ -38,6 +38,7 @@ const LoginForm = (props) =>{
                 window.localStorage.setItem('bytePhoto', response.data.bytePhoto)
                 window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
                 window.localStorage.setItem('email', data.email)
+                window.localStorage.setItem('login', true)
             })
             .catch(function (error){
                 console.log(error);

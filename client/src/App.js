@@ -1,5 +1,5 @@
 import {
-    BrowserRouter,
+    BrowserRouter, Navigate,
     Route,
     Routes,
 } from "react-router-dom";
@@ -15,6 +15,15 @@ import Profile from "./components/Profile/Profile"
 import './App.css';
 
 const App = (props) =>{
+    const user = window.localStorage.getItem('login')
+    // const ProtectedRoute = ({ user, children }) => {
+    //     console.log(user)
+    //     if (!user) {
+    //         return <Navigate to="/profile" replace />;
+    //     }
+    //
+    //     return children;
+    // };
     return (
         <BrowserRouter>
             <div className="content">
@@ -22,6 +31,14 @@ const App = (props) =>{
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="/main" element={<MainPage />} />
+                    {/*<Route*/}
+                    {/*    path="/login"*/}
+                    {/*    element={*/}
+                    {/*        <ProtectedRoute user={user}>*/}
+                    {/*            <LoginForm />*/}
+                    {/*        </ProtectedRoute>*/}
+                    {/*    }*/}
+                    {/*/>*/}
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegForm />} />
                     <Route path="/checkform" element={<CheckForm />} />
