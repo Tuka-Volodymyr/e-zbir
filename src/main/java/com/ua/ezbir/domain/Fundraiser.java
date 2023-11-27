@@ -30,9 +30,9 @@ public class Fundraiser {
     private String description;
     private boolean isClosed;
     private LocalDateTime currentDateTime;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> categories;
-    @OneToMany(mappedBy = "fundraiser")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "fundraiser")
     private List<Post> posts;
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()

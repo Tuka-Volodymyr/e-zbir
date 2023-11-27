@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             if(user.getBytePhoto()!=null)
                 base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
             return new UserResponse(user.getUsername(), user.getInfoAboutYourself(),
-                    base64Image, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getUsername()));
+                    base64Image, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getEmail()));
         } else {
             throw new UnauthorizedException();
         }
@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService {
         User user = (User) session.getAttribute("user");
         saveUser(user); // save user in db
         return new UserResponse(user.getUsername(), user.getInfoAboutYourself(),
-                null, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getUsername()));
+                null, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getEmail()));
 
     }
 
