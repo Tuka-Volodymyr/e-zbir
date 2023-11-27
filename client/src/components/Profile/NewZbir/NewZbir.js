@@ -73,20 +73,29 @@ const NewZbir = (props) =>{
                         <Col span={12}>
                             <Form.Item
                                 name="category"
-                                label="Категорія"
+                                label="Категорії"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Виберіть категорію',
+                                        message: 'Оберіть категорію',
+                                        type: 'array',
                                     },
                                 ]}
                             >
-                                <Select placeholder="Оберіть категорію">
-                                    <Option value="1">Медикаменти</Option>
-                                    <Option value="2">Гуманітарка</Option>
-                                    <Option value="3">Машина</Option>
-                                    <Option value="4">Спеціальне обладнання</Option>
-                                    <Option value="5">Інше</Option>
+                                <Select mode="multiple" placeholder="Оберіть категорії">
+                                    <Option value="Medical_Supplies_Equipment">Медичне обладнання</Option>
+                                    <Option value="Support_Military_Forces">Підтримка військових</Option>
+                                    <Option value="Psychological_Support">Психологічна підтримка</Option>
+                                    <Option value="Education_Training">Навчання</Option>
+                                    <Option value=" Emergency_Medical_Assistance">Невідкладна медична допомога</Option>
+                                    <Option value="Child_Protection">Захист дітей</Option>
+                                    <Option value="Environmental_Safety">Екологія</Option>
+                                    <Option value="Cyber_Security">Кібербезпека</Option>
+                                    <Option value="Infrastructure_Restoration">Інфраструктура</Option>
+                                    <Option value="Housing_Conditions">Житло</Option>
+                                    <Option value="Support_Vulnerable_Groups">Підтримка вразливих груп людей</Option>
+                                    <Option value="Information_Security">Інформатична безпека</Option>
+                                    <Option value="OTHER">Інше</Option>
                                 </Select>
                             </Form.Item>
                         </Col>

@@ -1,4 +1,4 @@
 import {createStore} from "redux";
-import {checkEmailReducer} from "./reduser/checkEmailReducer";
+import {rootReducer} from "./reduser/rootReducer";
 
-export const store = createStore(checkEmailReducer)
+export const store = createStore(rootReducer)

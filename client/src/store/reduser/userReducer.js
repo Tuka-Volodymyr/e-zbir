@@ -1,5 +1,5 @@
 const defaultState = {
-    fullName: '',
+    username: '',
     email: '',
     id: null,
 }
@@ -9,7 +9,7 @@ export const userReducer = (state = defaultState, action) =>{
         case('SET_USER'):
             return {
                 ...state,
-                fullName: action.payload,
+                username: action.payload,
                 email: action.payload,
                 id: action.payload,
             }

@@ -1,18 +1,14 @@
 
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 
 import LoginFormCss from './Login.module.css'
 import RegFormCss from "../RegForm/RegForm.module.css";
+import React, {useState} from "react";
 const LoginForm = (props) =>{
 
-    const getAuthToken = () =>{
-        return window.localStorage.getItem('auth_token')
-    }
-    const setAuthToken = (token) =>{
-        window.localStorage.setItem('auth_token', token)
-    }
+    const [status, setStatus] = useState(0)
 
     const {
         register,
@@ -34,8 +30,14 @@ const LoginForm = (props) =>{
             password:data.password,
         },{withCredentials: true /* Дозволяє передачу сесійних куки */})
             .then(function (response){
-                console.log(response);
-                setAuthToken(response.data.token)
+                console.log(response)
+                setStatus(response.status);
+                window.localStorage.setItem('auth_token', response.data.token)
+                window.localStorage.setItem('username', response.data.username)
+                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.localStorage.setItem('bytePhoto', response.data.bytePhoto)
+                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.localStorage.setItem('email', data.email)
             })
             .catch(function (error){
                 console.log(error);
@@ -57,6 +59,9 @@ const LoginForm = (props) =>{
 
     return(
     <div className = {LoginFormCss.content}>
+
+        <div>{status === 200 ? <Navigate to='/profile'/> : ""}</div>{/*Redirect to profile*/}
+
         <div className = {LoginFormCss.loginBlock}>
             <form onSubmit={handleSubmit(onSubmit)} className={LoginFormCss.form}>
 
