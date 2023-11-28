@@ -44,7 +44,7 @@ public class FundraiserServiceImpl implements FundraiserService {
         user.setFundraiserList(fundraiserList);
         // re-save user with updated fundraiser list
         userService.saveUser(user);
-        return fundraiser.toListOfFundraiserResponse(fundraiserList);
+        return Fundraiser.toListOfFundraiserResponse(fundraiserList);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FundraiserServiceImpl implements FundraiserService {
         fundraiserList.remove(fundraiser);
         user.setFundraiserList(fundraiserList);
         userService.saveUser(user);
-        return fundraiser.toListOfFundraiserResponse(fundraiserList);
+        return Fundraiser.toListOfFundraiserResponse(fundraiserList);
     }
 
 
@@ -84,18 +84,16 @@ public class FundraiserServiceImpl implements FundraiserService {
         fundraiserRepository.save(fundraiser);
         fundraiserList.add(fundraiser);
         userService.saveUser(user);
-        return fundraiser.toListOfFundraiserResponse(fundraiserList);
+        return Fundraiser.toListOfFundraiserResponse(fundraiserList);
     }
 
     @Override
     public List<FundraiserResponse> searchFundraisers(String keyword) {
-        Fundraiser fundraiser=new Fundraiser();
-        return fundraiser.toListOfFundraiserResponse(fundraiserRepository.findByNameContainingIgnoreCase(keyword));
+        return Fundraiser.toListOfFundraiserResponse(fundraiserRepository.findByNameContainingIgnoreCase(keyword));
     }
 
     @Override
     public List<FundraiserResponse> getAllFundraiser() {
-        Fundraiser fundraiser=new Fundraiser();
-        return fundraiser.toListOfFundraiserResponse(fundraiserRepository.findAll(sort));
+        return Fundraiser.toListOfFundraiserResponse(fundraiserRepository.findAll(sort));
     }
 }

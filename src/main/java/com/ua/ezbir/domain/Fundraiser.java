@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain;
 
+import com.ua.ezbir.services.impl.FundraiserServiceImpl;
 import com.ua.ezbir.web.fundraiser.Category;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
 import com.ua.ezbir.web.fundraiser.FundraiserResponse;
@@ -11,6 +12,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Data
@@ -47,8 +50,10 @@ public class Fundraiser {
                 .cards(getCards())
                 .build();
     }
-    public List<FundraiserResponse> toListOfFundraiserResponse(List<Fundraiser> fundraiserList){
+    public static List<FundraiserResponse> toListOfFundraiserResponse(List<Fundraiser> fundraiserList){
         List<FundraiserResponse> fundraiserResponseList=new ArrayList<>();
+        Collections.sort(fundraiserList, Comparator.comparing(Fundraiser::getCurrentDateTime).reversed());
+
         for(Fundraiser fundraiser:fundraiserList){
             FundraiserResponse fundraiserResponse=new FundraiserResponse(
                     fundraiser.getFundraiserId(),
