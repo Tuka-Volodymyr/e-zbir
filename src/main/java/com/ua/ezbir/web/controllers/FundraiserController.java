@@ -3,6 +3,7 @@ package com.ua.ezbir.web.controllers;
 import com.ua.ezbir.domain.Fundraiser;
 import com.ua.ezbir.services.FundraiserService;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.FundraiserResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,28 +22,29 @@ public class FundraiserController {
     private final HttpSession session;
 
     @GetMapping("/search")
-    public ResponseEntity<List<Fundraiser>> searchFundraisers(@RequestParam("keyword") String keyword) {
+    public ResponseEntity<List<FundraiserResponse>> searchFundraisers(@RequestParam("keyword") String keyword) {
         return new ResponseEntity<>(fundraiserService.searchFundraisers(keyword), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<List<Fundraiser>> addFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
-
+    public ResponseEntity<List<FundraiserResponse>> addFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
         return new ResponseEntity<>(fundraiserService.addFundraiser(fundraiserDto),HttpStatus.OK);
     }
     @PostMapping("/delete")
-    public ResponseEntity<String> deleteFundraiser(@RequestParam("id") long id) {
-        fundraiserService.deleteFundraiser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<FundraiserResponse>> deleteFundraiser(@RequestParam("id") long id) {
+        return new ResponseEntity<>(fundraiserService.deleteFundraiser(id),HttpStatus.OK);
     }
     @GetMapping("/get/redact")
     public ResponseEntity<?> getRedactFundraiser(@RequestParam("id") long id) {
         return new ResponseEntity<>(fundraiserService.getRedactFundraiser(id,session),HttpStatus.OK);
     }
     @PostMapping("/redact")
-    public ResponseEntity<String> redactFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
-        fundraiserService.redactFundraiser(fundraiserDto,session);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<FundraiserResponse>> redactFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
+        return new ResponseEntity<>(fundraiserService.redactFundraiser(fundraiserDto,session),HttpStatus.OK);
+    }
+    @GetMapping("/get/all")
+    public ResponseEntity<List<FundraiserResponse>> getAllFundraiser(){
+        return new ResponseEntity<>(fundraiserService.getAllFundraiser(),HttpStatus.OK);
     }
 
 

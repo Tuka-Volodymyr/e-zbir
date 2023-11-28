@@ -2,6 +2,7 @@ package com.ua.ezbir.domain;
 
 import com.ua.ezbir.web.fundraiser.Category;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.FundraiserResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -42,6 +44,23 @@ public class Fundraiser {
                 .name(getName())
                 .description(getDescription())
                 .categories(getCategories())
+                .cards(getCards())
                 .build();
+    }
+    public List<FundraiserResponse> toListOfFundraiserResponse(List<Fundraiser> fundraiserList){
+        List<FundraiserResponse> fundraiserResponseList=new ArrayList<>();
+        for(Fundraiser fundraiser:fundraiserList){
+            FundraiserResponse fundraiserResponse=new FundraiserResponse(
+                    fundraiser.getFundraiserId(),
+                    fundraiser.getName(),
+                    fundraiser.getJarLink(),
+                    fundraiser.getDescription(),
+                    fundraiser.getCurrentDateTime(),
+                    fundraiser.getCategories(),
+                    fundraiser.getCards(),
+                    fundraiser.isClosed());
+            fundraiserResponseList.add(fundraiserResponse);
+        }
+        return fundraiserResponseList;
     }
 }

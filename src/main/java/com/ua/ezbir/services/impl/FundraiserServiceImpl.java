@@ -7,8 +7,10 @@ import com.ua.ezbir.repository.FundraiserRepository;
 import com.ua.ezbir.services.FundraiserService;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
+import com.ua.ezbir.web.fundraiser.FundraiserResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,12 +21,11 @@ import java.util.List;
 public class FundraiserServiceImpl implements FundraiserService {
     private final FundraiserRepository fundraiserRepository;
     private final UserService userService;
-
+    public static final Sort sort = Sort.by(Sort.Direction.DESC, "currentDateTime");
     @Override
-    public List<Fundraiser> addFundraiser(FundraiserDto fundraiserDto) {
+    public List<FundraiserResponse> addFundraiser(FundraiserDto fundraiserDto) {
         User user = userService.getUser();
         List<Fundraiser> fundraiserList = user.getFundraiserList();
-
         Fundraiser fundraiser = Fundraiser.builder()
                 .user(user)
                 .name(fundraiserDto.getName())
@@ -43,11 +44,11 @@ public class FundraiserServiceImpl implements FundraiserService {
         user.setFundraiserList(fundraiserList);
         // re-save user with updated fundraiser list
         userService.saveUser(user);
-        return fundraiserList;
+        return fundraiser.toListOfFundraiserResponse(fundraiserList);
     }
 
     @Override
-    public void deleteFundraiser(long id) {
+    public List<FundraiserResponse> deleteFundraiser(long id) {
         User user =userService.getUser();
         Fundraiser fundraiser=fundraiserRepository
                 .findById(id)
@@ -57,6 +58,7 @@ public class FundraiserServiceImpl implements FundraiserService {
         fundraiserList.remove(fundraiser);
         user.setFundraiserList(fundraiserList);
         userService.saveUser(user);
+        return fundraiser.toListOfFundraiserResponse(fundraiserList);
     }
 
 
@@ -70,17 +72,30 @@ public class FundraiserServiceImpl implements FundraiserService {
 
     }
     @Override
-    public void redactFundraiser(FundraiserDto redactedFundraiserDto, HttpSession session) {
+    public List<FundraiserResponse> redactFundraiser(FundraiserDto redactedFundraiserDto, HttpSession session) {
+        User user=userService.getUser();
         Fundraiser fundraiser=(Fundraiser) session.getAttribute("redactFundraiser");
+        List<Fundraiser> fundraiserList= user.getFundraiserList();
+        fundraiserList.remove(fundraiser);
         fundraiser.setDescription(redactedFundraiserDto.getDescription());
         fundraiser.setName(redactedFundraiserDto.getName());
         fundraiser.setJarLink(redactedFundraiserDto.getJarLink());
         fundraiser.setCategories(redactedFundraiserDto.getCategories());
         fundraiserRepository.save(fundraiser);
+        fundraiserList.add(fundraiser);
+        userService.saveUser(user);
+        return fundraiser.toListOfFundraiserResponse(fundraiserList);
     }
 
     @Override
-    public List<Fundraiser> searchFundraisers(String keyword) {
-        return fundraiserRepository.findByNameContainingIgnoreCase(keyword);
+    public List<FundraiserResponse> searchFundraisers(String keyword) {
+        Fundraiser fundraiser=new Fundraiser();
+        return fundraiser.toListOfFundraiserResponse(fundraiserRepository.findByNameContainingIgnoreCase(keyword));
+    }
+
+    @Override
+    public List<FundraiserResponse> getAllFundraiser() {
+        Fundraiser fundraiser=new Fundraiser();
+        return fundraiser.toListOfFundraiserResponse(fundraiserRepository.findAll(sort));
     }
 }
