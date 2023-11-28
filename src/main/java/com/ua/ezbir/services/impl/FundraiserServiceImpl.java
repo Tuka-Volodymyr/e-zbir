@@ -21,7 +21,7 @@ public class FundraiserServiceImpl implements FundraiserService {
     private final UserService userService;
 
     @Override
-    public void addFundraiser(FundraiserDto fundraiserDto) {
+    public List<Fundraiser> addFundraiser(FundraiserDto fundraiserDto) {
         User user = userService.getUser();
         List<Fundraiser> fundraiserList = user.getFundraiserList();
 
@@ -33,6 +33,7 @@ public class FundraiserServiceImpl implements FundraiserService {
                 .isClosed(false)
                 .categories(fundraiserDto.getCategories())
                 .currentDateTime(LocalDateTime.now())
+                .cards(fundraiserDto.getCards())
                 .build();
 
         // save fundraiser in db
@@ -42,6 +43,7 @@ public class FundraiserServiceImpl implements FundraiserService {
         user.setFundraiserList(fundraiserList);
         // re-save user with updated fundraiser list
         userService.saveUser(user);
+        return fundraiserList;
     }
 
     @Override

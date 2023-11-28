@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 public interface FundraiserService {
-    void addFundraiser(FundraiserDto fundraiserDto);
+    List<Fundraiser> addFundraiser(FundraiserDto fundraiserDto);
     void deleteFundraiser(long id);
     void redactFundraiser(FundraiserDto redactedFundraiserDto, HttpSession session);
     FundraiserDto getRedactFundraiser(long id, HttpSession session);

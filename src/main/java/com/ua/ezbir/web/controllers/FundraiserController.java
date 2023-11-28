@@ -26,9 +26,9 @@ public class FundraiserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
-        fundraiserService.addFundraiser(fundraiserDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<Fundraiser>> addFundraiser(@RequestBody @Valid FundraiserDto fundraiserDto) {
+
+        return new ResponseEntity<>(fundraiserService.addFundraiser(fundraiserDto),HttpStatus.OK);
     }
     @PostMapping("/delete")
     public ResponseEntity<String> deleteFundraiser(@RequestParam("id") long id) {

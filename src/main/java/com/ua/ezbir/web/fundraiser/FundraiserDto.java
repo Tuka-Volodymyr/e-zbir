@@ -24,4 +24,5 @@ public class FundraiserDto {
 
 //    @NotBlank(message = "Categories should not be empty!")
     private List<String> categories;
+    private List<String> cards;
 }

@@ -34,6 +34,8 @@ public class Fundraiser {
     private List<String> categories;
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "fundraiser")
     private List<Post> posts;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> cards;
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
                 .jarLink(getJarLink())
