@@ -1,19 +1,57 @@
 import React, { useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
+import {Button, Col, Drawer, Form, Input, Row, Select, Space} from 'antd';
 
 import NewZbirCss from './NewZbir.module.css'
+import axios from "axios";
 
 const { Option } = Select;
 
 const NewZbir = (props) =>{
+
+    const [form] = Form.useForm();
+
+    //hook for open/close drawer new zbir
     const [open, setOpen] = useState(false);
+    //show new zbir
     const showDrawer = () => {
         setOpen(true);
     };
+
+    //close new zbir
     const onClose = () => {
         setOpen(false);
     };
+
+    //submit new zbir to backend
+    const Submit = () => {
+        form.validateFields().then(values => {
+            setOpen(false)
+            //get value from form new zbir
+            const formData = form.getFieldsValue();
+            console.log(formData)
+
+            axios.post('http://localhost:8080/fundraiser/add',{
+                name: formData.name,
+                money: formData.money,
+                category: formData.category,
+                cards: formData.cards,
+                jarLink: formData.jarLink,
+                description: formData.description,
+            },{withCredentials: true /* Дозволяє передачу сесійних куки */})
+                .then(response =>{
+                    console.log(response)
+                })
+                .catch(error =>{
+                    console.log(error)
+                })
+        }).catch(errorInfo => {
+            //error get value from form new abir
+            console.log('Помилка валідації:', errorInfo);
+        });
+    };
+
+
+
     return(
     <div className = {NewZbirCss.content}>
         <div className={NewZbirCss.position}>
@@ -21,28 +59,34 @@ const NewZbir = (props) =>{
             <Drawer
                 title="Створення нового збору"
                 placement='bottom'
-                height={720}
+                height={650}
                 onClose={onClose}
                 open={open}
                 styles={{
                     body: {
                         paddingBottom: 80,
+                        fontFamily: 'E-Ukraine',
+                        fontWeight: '200',
+                        outline: 'none'
                     },
                 }}
                 extra={
                     <Space>
-                        <Button onClick={onClose}>Скасувати</Button>
-                        <Button onClick={onClose} type="primary">
+                        <Button style={{fontFamily:'E-Ukraine', fontWeight:'200', height:'50px', width:'200px', backgroundColor:'#a44646'}} onClick={onClose}type="primary">
+                            Скасувати
+                        </Button>
+
+                        <Button style={{fontFamily:'E-Ukraine', fontWeight:'200', height:'50px', width:'200px', backgroundColor:'#084A16'}} onClick={Submit} type="primary">
                             Створити
                         </Button>
                     </Space>
                 }
             >
-                <Form layout="vertical" hideRequiredMark>
+                <Form form={form} layout="vertical" hideRequiredMark>
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="nameZbir"
+                                name="name"
                                 label="Назва збору"
                                 rules={[
                                     {
@@ -56,7 +100,7 @@ const NewZbir = (props) =>{
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="sumZbir"
+                                name="money"
                                 label="Сума збору"
                                 rules={[
                                     {
@@ -101,7 +145,7 @@ const NewZbir = (props) =>{
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="card"
+                                name="cards"
                                 label="Номер банківської карти"
                                 rules={[
                                     {
@@ -117,8 +161,8 @@ const NewZbir = (props) =>{
                     <Row gutter={16}>
                         <Col span={24}>
                             <Form.Item
-                                name="mono"
-                                label='Моно банка'
+                                name="jarLink"
+                                label='Лінк на банку'
                             >
                                 <Input
                                     style={{

@@ -50,13 +50,6 @@ nav a:hover{
 .socialNetworks img{
     margin: 0px 5px 0px 5px;
 }
-.logout {
-    display: flex;
-    cursor: pointer;
-    :hover{
-        transform: scale(1.05);
-    }
-}
 
 @media (max-width: 1440px) {
     .rectangle{

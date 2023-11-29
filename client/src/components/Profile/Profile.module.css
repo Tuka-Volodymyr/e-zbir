@@ -24,8 +24,19 @@
 }
 
 .settings{
+    display: flex;
+    justify-content: end;
     width: 100%;
-    text-align: end;
+}
+
+.logout{
+    margin-left: 20px;
+}
+
+.logout img{
+    display: flex;
+    cursor: pointer;
+    fill: #a44646;
 }
 
 .userCard{

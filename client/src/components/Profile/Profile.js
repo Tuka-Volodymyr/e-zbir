@@ -5,7 +5,6 @@ import ProfileCss from './Profile.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";
 import ProfileSettings from "./ProfileSettings/ProfileSettings";
 import NewZbir from "./NewZbir/NewZbir.js";
-import HeaderCss from "../Header/Header.module.css";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
@@ -32,12 +31,13 @@ const Profile = (props) =>{
                 <p className={ProfileCss.email}>{window.localStorage.getItem('email')}</p>
             </div>
 
-            <div onClick={logout} className={HeaderCss.logout}>
-                <img src="/img/logout.svg" alt=""/>
-            </div>
+
 
             <div className={ProfileCss.settings}>
                 <ProfileSettings/>
+                <div className={ProfileCss.logout}>
+                    <img onClick={logout} src="/img/logout.svg" alt=""/>
+                </div>
             </div>
         </div>
         <div className={ProfileCss.userCard}>
