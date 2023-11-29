@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain;
 
+import com.ua.ezbir.web.user.UserResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,6 +34,15 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     private List<Fundraiser> fundraiserList;
     private LocalDateTime currentDateTime;
+
+    public static UserResponse userToUserResponse(User user){
+        String base64Image = null;
+        if(user.getBytePhoto()!=null)
+            base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
+        return new UserResponse(user.getUser_id(), user.getUsername(), user.getInfoAboutYourself(),
+                base64Image, user.getFundraiserList(),null);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Реалізація отримання ролей (GrantedAuthority)

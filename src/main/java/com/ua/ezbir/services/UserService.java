@@ -19,7 +19,7 @@ public interface UserService {
 
     Optional<User> validUsernameAndPassword(String username, String password);
 
-    User getUserById(Long id);
+    UserResponse getUserById(Long id);
 
     User getUser();
 
