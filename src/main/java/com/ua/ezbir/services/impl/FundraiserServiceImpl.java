@@ -34,6 +34,7 @@ public class FundraiserServiceImpl implements FundraiserService {
                 .isClosed(false)
                 .categories(fundraiserDto.getCategories())
                 .currentDateTime(LocalDateTime.now())
+                .suma(fundraiserDto.getSuma())
                 .cards(fundraiserDto.getCards())
                 .build();
 
