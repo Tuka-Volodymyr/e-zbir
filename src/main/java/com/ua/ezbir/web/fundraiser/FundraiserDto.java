@@ -19,6 +19,8 @@ public class FundraiserDto {
     @NotBlank(message = "Jar link should not be empty!")
     private String jarLink;
 
+    private float suma;
+
     @NotBlank(message = "Description should not be empty!")
     private String description;
 

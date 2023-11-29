@@ -11,6 +11,7 @@ import java.util.List;
 
 public record FundraiserResponse(
          Long fundraiserId,
+         float suma,
          String name,
          String jarLink,
          String description,

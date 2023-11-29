@@ -30,6 +30,7 @@ public class Fundraiser {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private float suma;
     private String name;
     private String jarLink;
     private String description;
@@ -48,6 +49,7 @@ public class Fundraiser {
                 .name(getName())
                 .description(getDescription())
                 .categories(getCategories())
+                .suma(getSuma())
                 .cards(getCards())
                 .build();
     }
@@ -58,6 +60,7 @@ public class Fundraiser {
         for(Fundraiser fundraiser:fundraiserList){
             FundraiserResponse fundraiserResponse=new FundraiserResponse(
                     fundraiser.getFundraiserId(),
+                    fundraiser.getSuma(),
                     fundraiser.getName(),
                     fundraiser.getJarLink(),
                     fundraiser.getDescription(),
