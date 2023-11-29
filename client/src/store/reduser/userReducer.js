@@ -1,17 +1,16 @@
 const defaultState = {
     username: '',
     email: '',
+    login: window.localStorage.getItem('login'),
     id: null,
 }
 
 export const userReducer = (state = defaultState, action) =>{
     switch (action.type){
-        case('SET_USER'):
+        case('SET_USER_LOGIN'):
             return {
                 ...state,
-                username: action.payload,
-                email: action.payload,
-                id: action.payload,
+                login: action.payload,
             }
 
         default:

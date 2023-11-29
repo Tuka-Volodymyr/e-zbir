@@ -5,12 +5,24 @@ import ProfileCss from './Profile.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";
 import ProfileSettings from "./ProfileSettings/ProfileSettings";
 import NewZbir from "./NewZbir/NewZbir.js";
+import HeaderCss from "../Header/Header.module.css";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 
 
 const Profile = (props) =>{
+    const [checkLogin, setCheckLogin] = useState('')
+    const dispatch = useDispatch()
+    const isLogin = useSelector(state => state.userInfo)
+    const logout = () =>{
+        window.localStorage.clear()
+        setCheckLogin('logout')
+    }
     return(
     <div className = {ProfileCss.content}>
+        {checkLogin === 'logout' ? <Navigate to='/'/> : ""}{/*Redirect to checkForm*/}
         <div className={ProfileCss.profile}>
             <div className={ProfileCss.userAvatar}>
                 <Avatar shape="square" size={256} icon='G'></Avatar>
@@ -18,6 +30,10 @@ const Profile = (props) =>{
             <div className={ProfileCss.userInfo}>
                 <p className={ProfileCss.username}>{window.localStorage.getItem('username')}</p>
                 <p className={ProfileCss.email}>{window.localStorage.getItem('email')}</p>
+            </div>
+
+            <div onClick={logout} className={HeaderCss.logout}>
+                <img src="/img/logout.svg" alt=""/>
             </div>
 
             <div className={ProfileCss.settings}>

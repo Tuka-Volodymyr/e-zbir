@@ -11,7 +11,6 @@ import RegFormCss from "./RegForm.module.css";
 const RegForm = (props) =>{
 
     const dispatch = useDispatch()
-    const emailForm = useSelector(state => state.email)
 
     // set HttpRequest status
     const [status, setStatus] = useState(0)
@@ -64,7 +63,7 @@ const RegForm = (props) =>{
     return(
       <div className = {RegFormCss.content}>
 
-          <div>{status === 200 ? <Navigate to='/checkform'/> : ""}</div>{/*Redirect to checkForm*/}
+          {status === 200 ? <Navigate to='/checkform'/> : ""}{/*Redirect to checkForm*/}
 
           <div className = {RegFormCss.regBlock}>
               <form onSubmit={handleSubmit(onSubmit)} className={RegFormCss.form}>

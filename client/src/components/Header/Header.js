@@ -1,11 +1,19 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 
 
 import HeaderCss from './Header.module.css'
+import {useDispatch, useSelector} from "react-redux";
 const Header = (props) =>{
+  const dispatch = useDispatch()
+
+
   const Alert = () =>{
     alert("Ця кнопка поки не працює, працює тільки кнопка профілю")
+  }
+
+  const setLogin = () =>{
+    dispatch({type:'SET_USER_LOGIN', payload: window.localStorage.getItem('login')})
   }
 
   return (
@@ -27,10 +35,11 @@ const Header = (props) =>{
             <img onClick={Alert} src="/img/telegram.svg" alt=""/>
           </div>
           <div className={HeaderCss.profile}>
-            <NavLink to='/login'>
+            <NavLink onClick={setLogin} to='/login'>
               <img src="/img/user.svg" alt=""/>
             </NavLink>
           </div>
+
         </div>
       </div>
     </div>

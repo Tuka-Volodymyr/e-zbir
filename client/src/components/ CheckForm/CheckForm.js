@@ -34,8 +34,7 @@ const CheckForm = (props) =>{
 
 
     // get state (RegForm >> email)
-    const dispatch = useDispatch()
-    const email = useSelector(state => state.email)
+    const email = useSelector(state => state.checkEmail.email)
 
     return(
     <div className = {CheckFormCss.content}>
