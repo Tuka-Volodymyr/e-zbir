@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/register","/send/code","/check/code","/error/**",
                                 "/change/password/send/code","/change/password/check/code",
-                                "/change/password", "/login").permitAll()
+                                "/change/password", "/login","/fundraiser/get/all").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

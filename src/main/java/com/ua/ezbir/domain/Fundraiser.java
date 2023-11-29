@@ -41,6 +41,7 @@ public class Fundraiser {
     private List<Post> posts;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> cards;
+//    private long rating;
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
                 .jarLink(getJarLink())
