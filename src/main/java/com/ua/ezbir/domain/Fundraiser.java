@@ -59,6 +59,7 @@ public class Fundraiser {
 
         for(Fundraiser fundraiser:fundraiserList){
             FundraiserResponse fundraiserResponse=new FundraiserResponse(
+                    fundraiser.getUser().getUsername(),
                     fundraiser.getFundraiserId(),
                     fundraiser.getSuma(),
                     fundraiser.getName(),

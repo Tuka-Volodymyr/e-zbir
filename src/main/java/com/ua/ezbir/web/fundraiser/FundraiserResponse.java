@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record FundraiserResponse(
+        String username,
          Long fundraiserId,
          float suma,
          String name,
