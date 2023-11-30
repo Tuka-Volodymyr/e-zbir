@@ -39,8 +39,12 @@ public class User implements UserDetails {
         String base64Image = null;
         if(user.getBytePhoto()!=null)
             base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
-        return new UserResponse(user.getUser_id(), user.getUsername(), user.getInfoAboutYourself(),
-                base64Image, user.getFundraiserList(),null);
+        return new UserResponse(user.getUser_id(),
+                user.getUsername(),
+                user.getInfoAboutYourself(),
+                base64Image,
+                user.getFundraiserList(),
+                null);
     }
 
     @Override
