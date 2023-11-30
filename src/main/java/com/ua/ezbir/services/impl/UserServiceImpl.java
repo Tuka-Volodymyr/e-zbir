@@ -38,13 +38,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse login(LoginRequest request) {
         String base64Image = null;
-        Optional<User> userOptional = validUsernameAndPassword(request.getUsername(), request.getPassword());
+        Optional<User> userOptional = validUsernameAndPassword(request.getEmail(), request.getPassword());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             System.out.println(user.getUsername());
             if(user.getBytePhoto()!=null)
                 base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
-            return new UserResponse(user.getUser_id(), user.getUsername(), user.getInfoAboutYourself(),
+            return new UserResponse(user.getUser_id(), user.getFullName(), user.getInfoAboutYourself(),
                     base64Image, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getEmail()));
         } else {
             throw new UnauthorizedException();
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = User.builder()
-                .username(userDto.getUsername())
+                .fullName(userDto.getUsername())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .fundraiserList(new LinkedList<>())
@@ -142,9 +142,8 @@ public class UserServiceImpl implements UserService {
         codesIsEquals(code,userCode);
         User user = (User) session.getAttribute("user");
         saveUser(user); // save user in db
-        return new UserResponse(user.getUser_id(), user.getUsername(), user.getInfoAboutYourself(),
+        return new UserResponse(user.getUser_id(), user.getFullName(), user.getInfoAboutYourself(),
                 null, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getEmail()));
-
     }
 
     @Override

@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
     private String email;
-    private String username;
+    private String fullName;
     private String password;
     private String infoAboutYourself;
     @Column(length = 10000000)
@@ -40,7 +40,7 @@ public class User implements UserDetails {
         if(user.getBytePhoto()!=null)
             base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
         return new UserResponse(user.getUser_id(),
-                user.getUsername(),
+                user.getFullName(),
                 user.getInfoAboutYourself(),
                 base64Image,
                 user.getFundraiserList(),
