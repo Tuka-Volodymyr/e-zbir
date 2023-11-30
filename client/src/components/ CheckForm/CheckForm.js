@@ -30,6 +30,13 @@ const CheckForm = (props) =>{
             .then((response) => {
                 console.log(response)
                 setStatus(response.status)
+                window.localStorage.setItem('auth_token', response.data.token)
+                window.localStorage.setItem('username', response.data.username)
+                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.localStorage.setItem('bytePhoto', response.data.bytePhoto)
+                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.localStorage.setItem('email', data.email)
+                window.localStorage.setItem('login', true)
             })
             .catch((error) => {
                 console.log(error)
