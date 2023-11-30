@@ -14,6 +14,8 @@ import Profile from "./components/Profile/Profile"
 
 import './App.css';
 import PrivateRoute from "./util/router/PrivateRoute";
+import AllZbir from "./components/AllZbir/AllZbir";
+import UserPage from "./components/UserPage/UserPage";
 
 const App = (props) =>{
     return (
@@ -32,6 +34,8 @@ const App = (props) =>{
                     <Route path="/checkform" element={<CheckForm />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/ver" element={<ForgPassw />} />
+                    <Route path="/zbir" element={<AllZbir />} />
+                    <Route path="/user" element={<UserPage />} />
                 </Routes>
             </div>
         </BrowserRouter>

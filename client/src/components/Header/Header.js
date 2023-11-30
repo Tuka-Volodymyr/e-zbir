@@ -22,7 +22,7 @@ const Header = (props) =>{
         <h1 className={HeaderCss.logo}>Є-Збір</h1>
         <nav className={HeaderCss.list}>
           <NavLink to='/'>Головна</NavLink>
-          <NavLink to='/col'>Збори</NavLink>   
+          <NavLink to='/zbir'>Збори</NavLink>
           <NavLink to='/vol'>Волонтери</NavLink>
         </nav>
         <div className={HeaderCss.iconsBlock}>

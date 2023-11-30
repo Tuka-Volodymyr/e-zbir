@@ -21,31 +21,34 @@ const NewZbir = (props) =>{
     const onClose = () => {
         setOpen(false);
     };
-
     //submit new zbir to backend
     const Submit = () => {
         form.validateFields().then(values => {
             setOpen(false)
             //get value from form new zbir
             const formData = form.getFieldsValue();
-            console.log(formData)
-
-            axios.post('http://localhost:8080/fundraiser/add',{
+            console.log(formData.category.join(" "))
+            axios.post('http://localhost:8080/fundraiser/add', {
                 name: formData.name,
-                money: formData.money,
-                category: formData.category,
-                cards: formData.cards,
+                suma: formData.suma,
+                categories: formData.category,
+                cards: [],
                 jarLink: formData.jarLink,
                 description: formData.description,
-            },{withCredentials: true /* Дозволяє передачу сесійних куки */})
-                .then(response =>{
-                    console.log(response)
+            }, {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem('auth_token')}`,
+                },
+                withCredentials: true /* Дозволяє передачу сесійних куки */
+            })
+                .then(response => {
+                    console.log(response);
                 })
-                .catch(error =>{
-                    console.log(error)
-                })
+                .catch(error => {
+                    console.log(error);
+                });
         }).catch(errorInfo => {
-            //error get value from form new abir
+            //error get value from form new zbir
             console.log('Помилка валідації:', errorInfo);
         });
     };
@@ -100,7 +103,7 @@ const NewZbir = (props) =>{
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="money"
+                                name="suma"
                                 label="Сума збору"
                                 rules={[
                                     {
