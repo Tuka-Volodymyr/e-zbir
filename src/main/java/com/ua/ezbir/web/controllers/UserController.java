@@ -37,7 +37,7 @@ public class UserController {
         userService.registerNewUser(userDto, session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("/get/user")
+    @GetMapping("/user")
     public ResponseEntity<UserResponse> getUser(@RequestParam("id") Long id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }

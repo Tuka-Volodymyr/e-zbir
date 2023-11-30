@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = validUsernameAndPassword(request.getUsername(), request.getPassword());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            System.out.println(user.getUsername());
             if(user.getBytePhoto()!=null)
                 base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
             return new UserResponse(user.getUser_id(), user.getUsername(), user.getInfoAboutYourself(),
