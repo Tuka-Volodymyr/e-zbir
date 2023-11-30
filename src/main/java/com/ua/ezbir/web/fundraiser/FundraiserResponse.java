@@ -20,6 +20,8 @@ public record FundraiserResponse(
          LocalDateTime currentDateTime,
          List<String> categories,
          List<String> cards,
-         boolean isClosed
+         List<Post> posts,
+         boolean isClosed,
+        long views
 ) {
 }

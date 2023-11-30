@@ -37,15 +37,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse login(LoginRequest request) {
-        String base64Image = null;
         Optional<User> userOptional = validUsernameAndPassword(request.getEmail(), request.getPassword());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             System.out.println(user.getUsername());
-            if(user.getBytePhoto()!=null)
-                base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
-            return new UserResponse(user.getUser_id(), user.getFullName(), user.getInfoAboutYourself(),
-                    base64Image, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getEmail()));
+            return User.userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
         } else {
             throw new UnauthorizedException();
         }
@@ -60,7 +56,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getUserById(Long id) {
         User user= userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        return User.userToUserResponse(user);
+        user.setViews(user.getViews()+1);
+        saveUser(user);
+        return User.userToUserResponseWithToken(user,null);
     }
 
     @Override
@@ -142,8 +140,7 @@ public class UserServiceImpl implements UserService {
         codesIsEquals(code,userCode);
         User user = (User) session.getAttribute("user");
         saveUser(user); // save user in db
-        return new UserResponse(user.getUser_id(), user.getFullName(), user.getInfoAboutYourself(),
-                null, user.getFundraiserList(),userAuthenticationProvider.createToken(user.getEmail()));
+        return User.userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
     }
 
     @Override

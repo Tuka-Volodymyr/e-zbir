@@ -34,17 +34,20 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     private List<Fundraiser> fundraiserList;
     private LocalDateTime currentDateTime;
-
-    public static UserResponse userToUserResponse(User user){
+    @Column(columnDefinition = "bigint default 0")
+    private long views=0;
+    public static UserResponse userToUserResponseWithToken(User user,String token){
         String base64Image = null;
         if(user.getBytePhoto()!=null)
             base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
-        return new UserResponse(user.getUser_id(),
+        return new UserResponse(
+                user.getUser_id(),
                 user.getFullName(),
                 user.getInfoAboutYourself(),
-                base64Image,
+                null,
                 user.getFundraiserList(),
-                null);
+                null,
+                user.getViews());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ua.ezbir.services.impl.FundraiserServiceImpl;
 import com.ua.ezbir.web.fundraiser.Category;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
@@ -29,6 +30,7 @@ public class Fundraiser {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
     private float suma;
     private String name;
@@ -42,7 +44,9 @@ public class Fundraiser {
     private List<Post> posts;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> cards;
-//    private long rating;
+    @Column(columnDefinition = "bigint default 0")
+    private long views=0;
+
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
                 .jarLink(getJarLink())
@@ -53,14 +57,29 @@ public class Fundraiser {
                 .cards(getCards())
                 .build();
     }
+    public static FundraiserResponse toFundraiserResponse(Fundraiser fundraiser){
+        return new FundraiserResponse(
+                fundraiser.getUser().getUser_id(),
+                fundraiser.getUser().getFullName(),
+                fundraiser.getFundraiserId(),
+                fundraiser.getSuma(),
+                fundraiser.getName(),
+                fundraiser.getJarLink(),
+                fundraiser.getDescription(),
+                fundraiser.getCurrentDateTime(),
+                fundraiser.getCategories(),
+                fundraiser.getCards(),
+                fundraiser.getPosts(),
+                fundraiser.isClosed(),
+                fundraiser.getViews());
+    }
     public static List<FundraiserResponse> toListOfFundraiserResponse(List<Fundraiser> fundraiserList){
         List<FundraiserResponse> fundraiserResponseList=new ArrayList<>();
-        Collections.sort(fundraiserList, Comparator.comparing(Fundraiser::getCurrentDateTime).reversed());
-
+        fundraiserList.sort(Comparator.comparing(Fundraiser::getViews).reversed());
         for(Fundraiser fundraiser:fundraiserList){
             FundraiserResponse fundraiserResponse=new FundraiserResponse(
                     fundraiser.getUser().getUser_id(),
-                    fundraiser.getUser().getUsername(),
+                    fundraiser.getUser().getFullName(),
                     fundraiser.getFundraiserId(),
                     fundraiser.getSuma(),
                     fundraiser.getName(),
@@ -69,7 +88,9 @@ public class Fundraiser {
                     fundraiser.getCurrentDateTime(),
                     fundraiser.getCategories(),
                     fundraiser.getCards(),
-                    fundraiser.isClosed());
+                    fundraiser.getPosts(),
+                    fundraiser.isClosed(),
+                    fundraiser.getViews());
             fundraiserResponseList.add(fundraiserResponse);
         }
         return fundraiserResponseList;

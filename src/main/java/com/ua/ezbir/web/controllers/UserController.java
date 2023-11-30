@@ -37,10 +37,7 @@ public class UserController {
         userService.registerNewUser(userDto, session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("/user")
-    public ResponseEntity<UserResponse> getUser(@RequestParam("id") Long id) {
-        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
-    }
+
 
     @GetMapping("/user/search")
     public ResponseEntity<List<User>> searchUsers(@RequestParam("keyword") String keyword) {
@@ -83,5 +80,9 @@ public class UserController {
     public ResponseEntity<?> changePassword(@RequestBody @Valid PasswordDto passwordDto){
         userService.changePassword(passwordDto,session);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/get/user")
+    public ResponseEntity<UserResponse> getUser(@RequestParam("id") long id) {
+        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 }

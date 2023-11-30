@@ -1,5 +1,6 @@
 package com.ua.ezbir.services;
 
+import com.ua.ezbir.domain.Fundraiser;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
 import com.ua.ezbir.web.fundraiser.FundraiserResponse;
 import jakarta.servlet.http.HttpSession;
@@ -14,4 +15,6 @@ public interface FundraiserService {
 
     List<FundraiserResponse> searchFundraisers(String keyword);
     List<FundraiserResponse> getAllFundraiser();
+
+    FundraiserResponse getFundraiserById(long id);
 }

@@ -21,7 +21,7 @@ public class FundraiserController {
     private final FundraiserService fundraiserService;
     private final HttpSession session;
 
-    @GetMapping("/search")
+    @GetMapping("/get/search")
     public ResponseEntity<List<FundraiserResponse>> searchFundraisers(@RequestParam("keyword") String keyword) {
         return new ResponseEntity<>(fundraiserService.searchFundraisers(keyword), HttpStatus.OK);
     }
@@ -45,6 +45,10 @@ public class FundraiserController {
     @GetMapping("/get/all")
     public ResponseEntity<List<FundraiserResponse>> getAllFundraiser(){
         return new ResponseEntity<>(fundraiserService.getAllFundraiser(),HttpStatus.OK);
+    }
+    @GetMapping("/get")
+    public ResponseEntity<FundraiserResponse> getFundraiserById(@RequestParam("id") long id){
+        return new ResponseEntity<>(fundraiserService.getFundraiserById(id),HttpStatus.OK);
     }
 
 

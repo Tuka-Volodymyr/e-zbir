@@ -97,4 +97,15 @@ public class FundraiserServiceImpl implements FundraiserService {
     public List<FundraiserResponse> getAllFundraiser() {
         return Fundraiser.toListOfFundraiserResponse(fundraiserRepository.findAll(sort));
     }
+
+    @Override
+    public FundraiserResponse getFundraiserById(long id) {
+        Fundraiser fundraiser=fundraiserRepository
+                .findById(id)
+                .orElseThrow(FundraiserNotFoundException::new);
+        fundraiser.setViews(fundraiser.getViews()+1);
+        fundraiserRepository.save(fundraiser);
+        return Fundraiser.toFundraiserResponse(fundraiser);
+    }
+
 }

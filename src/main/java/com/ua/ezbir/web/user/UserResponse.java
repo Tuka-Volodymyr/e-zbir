@@ -10,5 +10,6 @@ public record UserResponse(
         String infoAboutYourself,
         String bytePhoto,
         List<Fundraiser> fundraiserList,
-        String token
+        String token,
+        long views
 ) {}
