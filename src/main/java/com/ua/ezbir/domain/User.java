@@ -44,9 +44,9 @@ public class User implements UserDetails {
                 user.getUser_id(),
                 user.getFullName(),
                 user.getInfoAboutYourself(),
-                null,
+                base64Image,
                 user.getFundraiserList(),
-                null,
+                token,
                 user.getViews());
     }
 
