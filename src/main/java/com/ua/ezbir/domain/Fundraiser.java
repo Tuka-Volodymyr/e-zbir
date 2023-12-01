@@ -1,6 +1,8 @@
 package com.ua.ezbir.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ua.ezbir.services.impl.FundraiserServiceImpl;
 import com.ua.ezbir.web.fundraiser.Category;
 import com.ua.ezbir.web.fundraiser.FundraiserDto;
@@ -30,7 +32,7 @@ public class Fundraiser {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
+    @JsonBackReference
     private User user;
     private float suma;
     private String name;
@@ -41,6 +43,7 @@ public class Fundraiser {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> categories;
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "fundraiser")
+    @JsonManagedReference
     private List<Post> posts;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> cards;

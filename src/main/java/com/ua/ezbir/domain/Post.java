@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Post {
     private Long postId;
     @ManyToOne
     @JoinColumn(name = "fundraiser_id")
+    @JsonBackReference
     private Fundraiser fundraiser;
     @ElementCollection
     @Column(length =  100000000)

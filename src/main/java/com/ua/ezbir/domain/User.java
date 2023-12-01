@@ -1,5 +1,6 @@
 package com.ua.ezbir.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ua.ezbir.web.user.UserResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class User implements UserDetails {
     private byte[] bytePhoto;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
+    @JsonManagedReference
     private List<Fundraiser> fundraiserList;
     private LocalDateTime currentDateTime;
     @Column(columnDefinition = "bigint default 0")
