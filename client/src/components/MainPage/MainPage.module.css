@@ -3,23 +3,44 @@
     margin: 0 auto;
 }
 
-.search{
-    height: 50px;
-    background: #fff;
-    margin: 0 auto;
-    margin-top: 25px;
-    border-radius: 25px;
+/*.search{*/
+/*    height: 50px;*/
+/*    background: #fff;*/
+/*    margin: 0 auto;*/
+/*    margin-top: 25px;*/
+/*    border-radius: 25px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    padding: 0 20px;*/
+/*}*/
+/*.search input{*/
+/*    width: 97%;*/
+/*    height: 100%;*/
+/*    border-radius: 25px;*/
+/*    border: none;*/
+/*    outline: none;*/
+/*    font-weight: 200;*/
+/*}*/
+
+.aboutUs{
     display: flex;
-    align-items: center;
-    padding: 0 20px;
-}
-.search input{
-    width: 97%;
-    height: 100%;
-    border-radius: 25px;
-    border: none;
-    outline: none;
+    font-size: 28px;
+    font-family: E-Ukraine-Head;
     font-weight: 200;
+    margin-top: 40px;
+    margin-left: 5px;
+}
+
+.block{
+    font-family:Cormorant Garamond;
+    width: 100%;
+    height: 500px;
+    background: #fff;
+    margin: 10px 0px 0px 0px;
+    border-radius: 10px;
+    display: grid;
+    font-size: 30px;
+    text-align: center;
 }
 
 .actualZbir{
@@ -37,5 +58,14 @@
     margin-bottom: 50px;
 }
 
-
-
+.buttonShowMore{
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    color: #084A16;
+    text-align: center;
+    font-family: Cormorant Garamond;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 10px;
+}
