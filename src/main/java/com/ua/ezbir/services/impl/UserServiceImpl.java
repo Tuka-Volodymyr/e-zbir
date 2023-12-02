@@ -6,23 +6,20 @@ import com.ua.ezbir.domain.exceptions.BadRequestException;
 import com.ua.ezbir.domain.exceptions.UnauthorizedException;
 import com.ua.ezbir.domain.exceptions.UserNotFoundException;
 import com.ua.ezbir.repository.UserRepository;
+import com.ua.ezbir.services.MinioService;
 import com.ua.ezbir.services.UserService;
-import com.ua.ezbir.web.code.CodeDto;
 import com.ua.ezbir.web.user.LoginRequest;
 import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
 import com.ua.ezbir.web.user.UserResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -33,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserAuthenticationProvider userAuthenticationProvider;
+    private final MinioService minioService;
 
 
     @Override
@@ -131,12 +129,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addPhoto(MultipartFile file) throws IOException {
-        if (file.isEmpty())
-            throw new BadRequestException("File is empty");
-        byte[] photoBytes = file.getBytes();
-        User user=getUser();
-        user.setBytePhoto(photoBytes);
+    public void addPhoto(MultipartFile file) {
+        User user = getUser();
+        String path = String.format("/%d/%s", user.getUser_id(), file.getOriginalFilename());
+        minioService.upload(file, path);
+        user.setPhotoPath(path);
         saveUser(user);
     }
 

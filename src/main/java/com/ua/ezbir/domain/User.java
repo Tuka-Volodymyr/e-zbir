@@ -29,24 +29,21 @@ public class User implements UserDetails {
     private String fullName;
     private String password;
     private String infoAboutYourself;
-    @Column(length = 10000000)
-    private byte[] bytePhoto;
+    private String photoPath;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     @JsonManagedReference
     private List<Fundraiser> fundraiserList;
     private LocalDateTime currentDateTime;
     @Column(columnDefinition = "bigint default 0")
-    private long views=0;
-    public static UserResponse userToUserResponseWithToken(User user,String token){
-        String base64Image = null;
-        if(user.getBytePhoto()!=null)
-            base64Image = Base64.getEncoder().encodeToString(user.getBytePhoto());
+    private long views = 0;
+
+    public static UserResponse userToUserResponseWithToken(User user, String token){
         return new UserResponse(
                 user.getUser_id(),
                 user.getFullName(),
                 user.getInfoAboutYourself(),
-                base64Image,
+                user.getPhotoPath(),
                 user.getFundraiserList(),
                 token,
                 user.getViews());
