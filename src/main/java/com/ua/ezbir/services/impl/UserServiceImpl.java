@@ -7,15 +7,12 @@ import com.ua.ezbir.domain.exceptions.UnauthorizedException;
 import com.ua.ezbir.domain.exceptions.UserNotFoundException;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
-import com.ua.ezbir.web.code.CodeDto;
 import com.ua.ezbir.web.user.LoginRequest;
 import com.ua.ezbir.web.user.PasswordDto;
 import com.ua.ezbir.web.user.UserDto;
 import com.ua.ezbir.web.user.UserResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -131,13 +128,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addPhoto(MultipartFile file) throws IOException {
+    public UserResponse addPhoto(MultipartFile file) throws IOException {
         if (file.isEmpty())
             throw new BadRequestException("File is empty");
         byte[] photoBytes = file.getBytes();
         User user=getUser();
         user.setBytePhoto(photoBytes);
         saveUser(user);
+        User.userToUserResponseWithToken(user,null);
+        return null;
     }
 
     @Override
