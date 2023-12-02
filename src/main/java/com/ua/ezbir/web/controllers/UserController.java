@@ -2,6 +2,7 @@ package com.ua.ezbir.web.controllers;
 
 import com.ua.ezbir.config.UserAuthenticationProvider;
 import com.ua.ezbir.domain.User;
+import com.ua.ezbir.services.MailService;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.web.user.LoginRequest;
 import com.ua.ezbir.web.user.PasswordDto;
@@ -25,6 +26,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
     private final UserService userService;
+    private final MailService mailService;
     private final HttpSession session;
 
     @PostMapping("/login")
@@ -46,7 +48,7 @@ public class UserController {
 
     @PostMapping("/send/code")
     public ResponseEntity<?> sendCodeForVerification(@RequestParam("email") String email) {
-        userService.sendCodeToEmailForVerification(email, session);
+        mailService.sendCodeToEmailForVerification(email, session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -68,7 +70,7 @@ public class UserController {
 
     @PostMapping("/change/password/send/code")
     public ResponseEntity<?> sendCodeForChangePassword(@RequestParam("email") String email) {
-        userService.sendCodeToEmailForChangePassword(email, session);
+        mailService.sendCodeToEmailForChangePassword(email, session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/change/password/check/code")

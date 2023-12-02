@@ -29,7 +29,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final JavaMailSender javaMailSender;
+
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserAuthenticationProvider userAuthenticationProvider;
@@ -117,20 +117,7 @@ public class UserServiceImpl implements UserService {
         session.setAttribute("user",user);
     }
 
-    @Override
-    public void sendCodeToEmailForVerification(String email, HttpSession session) {
-        CodeDto codeDto = new CodeDto(); // auto-generated code
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("[Є-Збір] Будь ласка, підтвердіть вашу електронну адресу");
-        message.setText("""
-                Дякуємо за регістрацію на Є-Збір! Код для підтвердження:\s
-                """ + codeDto.getCode());
-        javaMailSender.send(message);
-
-        session.setAttribute("codeVerification", codeDto.getCode());
-    }
 
 
 
@@ -158,21 +145,6 @@ public class UserServiceImpl implements UserService {
         User user=getUser();
         user.setInfoAboutYourself(data);
         saveUser(user);
-    }
-
-    @Override
-    public void sendCodeToEmailForChangePassword(String email, HttpSession session) {
-        CodeDto codeDto = new CodeDto(); // auto-generated code
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("[Є-Збір] Будь ласка, підтвердіть вашу електронну адресу");
-        message.setText("""
-                Код для зміни паролю:\s
-                """ + codeDto.getCode());
-        javaMailSender.send(message);
-        session.setAttribute("userEmailChangePassword",email);
-        session.setAttribute("codeChangePassword", codeDto.getCode());
     }
 
     @Override

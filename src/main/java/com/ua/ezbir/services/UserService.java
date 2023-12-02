@@ -31,9 +31,6 @@ public interface UserService {
 
     void passwordsIsEquals(String password, String repeatPassword);
 
-    void sendCodeToEmailForVerification(String email, HttpSession session);
-
-    void sendCodeToEmailForChangePassword(String email, HttpSession session);
 
     void checkCodeForChangePassword(String userCode, HttpSession session);
 
