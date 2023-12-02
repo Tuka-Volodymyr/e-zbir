@@ -31,7 +31,21 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserAuthenticationProvider userAuthenticationProvider;
     private final MinioService minioService;
-
+    @Override
+    public UserResponse userToUserResponseWithToken(User user, String token){
+        MultipartFile multipartFile=null;
+        if(user.getPhotoPath()!=null){
+            multipartFile=(MultipartFile) minioService.getFileContent(user.getPhotoPath());
+        }
+        return new UserResponse(
+                user.getUser_id(),
+                user.getFullName(),
+                user.getInfoAboutYourself(),
+                multipartFile,
+                user.getFundraiserList(),
+                token,
+                user.getViews());
+    }
 
     @Override
     public UserResponse login(LoginRequest request) {
@@ -39,7 +53,7 @@ public class UserServiceImpl implements UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             System.out.println(user.getUsername());
-            return User.userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
+            return userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
         } else {
             throw new UnauthorizedException();
         }
@@ -56,7 +70,7 @@ public class UserServiceImpl implements UserService {
         User user= userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         user.setViews(user.getViews()+1);
         saveUser(user);
-        return User.userToUserResponseWithToken(user,null);
+        return userToUserResponseWithToken(user,null);
     }
 
     @Override
@@ -125,18 +139,18 @@ public class UserServiceImpl implements UserService {
         codesIsEquals(code,userCode);
         User user = (User) session.getAttribute("user");
         saveUser(user); // save user in db
-        return User.userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
+        return userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
     }
 
     @Override
-    public UserResponse addPhoto(MultipartFile file) {
+    public MultipartFile addPhoto(MultipartFile file) {
         User user = getUser();
         String extension = "." + Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
         String path = String.format("/%d/photo%s", user.getUser_id(), extension);
         minioService.upload(file, path);
         user.setPhotoPath(path);
         saveUser(user);
-        return User.userToUserResponseWithToken(user,null);
+        return file;
     }
 
     @Override

@@ -38,9 +38,10 @@ public interface UserService {
 
     UserResponse checkCodeVerification(String code, HttpSession session);
 
-    UserResponse addPhoto(MultipartFile file) throws IOException;
+    MultipartFile addPhoto(MultipartFile file) throws IOException;
 
     void addInfoAboutYourself(String data);
 
     void saveUser(User user);
+    UserResponse userToUserResponseWithToken(User user, String token);
 }

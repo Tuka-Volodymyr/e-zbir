@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -38,16 +39,7 @@ public class User implements UserDetails {
     @Column(columnDefinition = "bigint default 0")
     private long views = 0;
 
-    public static UserResponse userToUserResponseWithToken(User user, String token){
-        return new UserResponse(
-                user.getUser_id(),
-                user.getFullName(),
-                user.getInfoAboutYourself(),
-                user.getPhotoPath(),
-                user.getFundraiserList(),
-                token,
-                user.getViews());
-    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
