@@ -129,12 +129,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addPhoto(MultipartFile file) {
+    public UserResponse addPhoto(MultipartFile file) {
         User user = getUser();
         String path = String.format("/%d/%s", user.getUser_id(), file.getOriginalFilename());
         minioService.upload(file, path);
         user.setPhotoPath(path);
         saveUser(user);
+        return User.userToUserResponseWithToken(user,null);
     }
 
     @Override
