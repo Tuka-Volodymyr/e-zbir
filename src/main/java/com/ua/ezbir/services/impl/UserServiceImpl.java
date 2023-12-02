@@ -135,8 +135,8 @@ public class UserServiceImpl implements UserService {
         User user=getUser();
         user.setBytePhoto(photoBytes);
         saveUser(user);
-        User.userToUserResponseWithToken(user,null);
-        return null;
+        return User.userToUserResponseWithToken(user,null);
+
     }
 
     @Override
