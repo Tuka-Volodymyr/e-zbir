@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AllZbirCss from './AllZbir.module.css';
+import FundraiserCss from './Fundraiser.module.css';
 import CollectionCard from '../CollectionCard/CollectionCard';
 
-const AllZbir = (props) => {
+const Fundraiser = (props) => {
     const [itemList, setItemList] = useState([]);
 
     useEffect(() => {
@@ -14,7 +14,8 @@ const AllZbir = (props) => {
                     username : el.username,
                     nameZbir: el.name,
                     description: el.description,
-                    suma : el.suma
+                    suma : el.suma,
+                    id : el.userId
                 }));
                 setItemList(data);
             })
@@ -24,7 +25,7 @@ const AllZbir = (props) => {
     }, []); // Empty dependency array ensures this effect runs once on component mount
 
     return (
-        <div className="">
+        <div className={FundraiserCss.content}>
             <h1>Всі збори</h1>
             {itemList.map((item, index) => (
                 <CollectionCard
@@ -33,10 +34,11 @@ const AllZbir = (props) => {
                     description={item.description}
                     suma = {item.suma}
                     username = {item.username}
+                    userId = {item.id}
                 />
             ))}
         </div>
     );
 };
 
-export default AllZbir;
+export default Fundraiser;

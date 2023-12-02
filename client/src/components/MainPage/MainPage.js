@@ -16,8 +16,9 @@ const MainPage = (props) =>{
     <div className = {MainPageCss.content}>
         <h3 className={MainPageCss.aboutUs}>Про нас</h3>
         <div className={MainPageCss.block}>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dicta est odit quas qui veniam vitae. Harum labore, totam! Amet aperiam assumenda autem delectus dolores fugit molestias nam, natus veritatis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dicta est odit quas qui veniam vitae. Harum labore, totam! Amet aperiam assumenda autem delectus dolores fugit molestias nam, natus veritatis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dicta est odit quas qui veniam vitae. Harum labore, totam! Amet aperiam assumenda autem delectus dolores fugit molestias nam, natus veritatis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dicta est odit quas qui veniam vitae. Harum labore, totam! Amet aperiam assumenda autem delectus dolores fugit molestias nam, natus veritatis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dicta est odit quas qui veniam vitae. Harum labore, totam! Amet aperiam assumenda autem delectus dolores fugit molestias nam, natus veritatis!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dicta est odit quas qui veniam vitae. Harum labore, totam! Amet aperiam assumenda autem delectus dolores fugit molestias nam, natus veritatis!</p>
+            about us про нас
         </div>
+
         <h3 className={MainPageCss.actualZbir}>
             Актуальні Збори
         </h3>

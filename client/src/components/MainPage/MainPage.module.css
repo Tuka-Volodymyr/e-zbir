@@ -27,12 +27,12 @@
     font-size: 28px;
     font-family: E-Ukraine-Head;
     font-weight: 200;
-    margin-top: 40px;
+    margin-top: 15px;
     margin-left: 5px;
 }
 
 .block{
-    font-family:Cormorant Garamond;
+    font-weight: 100;
     width: 100%;
     height: 500px;
     background: #fff;
@@ -44,12 +44,11 @@
 }
 
 .actualZbir{
-    display: flex;
-    justify-content: center;
     font-size: 28px;
     font-family: E-Ukraine-Head;
     font-weight: 200;
     margin-top: 15px;
+    background: #fff;
 }
 .zbirList{
     display: flex;

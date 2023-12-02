@@ -1,4 +1,3 @@
-
 import {Navigate, NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
@@ -36,7 +35,7 @@ const LoginForm = (props) =>{
                 window.localStorage.setItem('username', response.data.username)
                 window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
                 window.localStorage.setItem('bytePhoto', response.data.bytePhoto)
-                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.localStorage.setItem('fundraiserList', response.data.fundraiserList)
                 window.localStorage.setItem('email', data.email)
                 window.localStorage.setItem('login', true)
             })
@@ -45,18 +44,6 @@ const LoginForm = (props) =>{
             });
     }
 
-    const Logout = () =>{
-        console.log('1')
-        axios.post('http://localhost:8080/user/search?keyword=rus',{
-
-        })
-            .then((response) =>{
-                console.log(response)
-            })
-            .catch((error) =>{
-                console.log(error)
-            })
-    }
 
     return(
     <div className = {LoginFormCss.content}>
