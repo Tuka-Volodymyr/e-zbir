@@ -28,6 +28,7 @@ const NewZbir = (props) =>{
             //get value from form new zbir
             const formData = form.getFieldsValue();
             console.log(formData.category.join(" "))
+
             axios.post('http://localhost:8080/fundraiser/add', {
                 name: formData.name,
                 suma: formData.suma,

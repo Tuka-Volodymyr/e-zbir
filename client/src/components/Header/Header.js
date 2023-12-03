@@ -1,9 +1,9 @@
 import React from 'react'
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 import HeaderCss from './Header.module.css'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 const Header = (props) =>{
   const dispatch = useDispatch()
 
@@ -11,7 +11,6 @@ const Header = (props) =>{
   const Alert = () =>{
     alert("Ця кнопка поки не працює, працює тільки кнопка профілю")
   }
-
   const setLogin = () =>{
     dispatch({type:'SET_USER_LOGIN', payload: window.localStorage.getItem('login')})
   }

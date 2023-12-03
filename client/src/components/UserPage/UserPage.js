@@ -1,8 +1,16 @@
 import axios from "axios";
+import {useSelector} from "react-redux";
+
+import UserPageCss from './UserPage.module.css'
 
 const UserPage = (props) =>{
 
-    axios.get("http://localhost:8080/user?id=1")
+    const id = useSelector(state => state.userId.id)
+
+    console.log(id)
+
+
+    axios.get(`http://localhost:8080/get/user?id=${id}`)
         .then(response => {
             console.log(response)
         })
@@ -11,7 +19,7 @@ const UserPage = (props) =>{
         })
 
     return(
-    <div className = "">
+    <div className = {UserPageCss.content}>
         Hello
     </div>
     );

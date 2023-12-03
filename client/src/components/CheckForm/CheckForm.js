@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 import CheckFormCss from './CheckForm.module.css'
 import {useForm} from "react-hook-form";
@@ -12,11 +12,6 @@ const CheckForm = (props) =>{
 
     const {
         register,
-        formState:{
-            errors,
-            isValid,
-
-        },
         handleSubmit,
         reset,
     } = useForm({mode: "onBlur"})
@@ -24,7 +19,7 @@ const CheckForm = (props) =>{
     const onSubmit = (data) => {
         reset()
 
-        axios.post('http://localhost:8080/check/code?code=' + `${data.code}`,{
+        axios.post(`http://localhost:8080/check/code?code=${data.code}`,{
             code: data.code,
         },{withCredentials: true /* Дозволяє передачу сесійних куки */})
             .then((response) => {
