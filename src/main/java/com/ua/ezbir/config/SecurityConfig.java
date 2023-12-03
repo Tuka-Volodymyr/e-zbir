@@ -35,9 +35,20 @@ public class SecurityConfig {
         http
                 .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/get/user","/register","/send/code","/check/code","/error/**",
-                                "/change/password/send/code","/change/password/check/code",
-                                "/change/password", "/login","/fundraiser/get/all","/fundraiser/get").permitAll()
+                        .requestMatchers("/",
+                                "/user/get",
+                                "/user/register",
+                                "/user/send/code",
+                                "/user/check/code",
+                                "/error/**",
+                                "/user/change/password/send/code",
+                                "/user/change/password/check/code",
+                                "/user/change/password",
+                                "/user/login",
+                                "/user/fundraiser/get/all",
+                                "/user/fundraiser/get").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

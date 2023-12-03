@@ -36,6 +36,9 @@ public class User implements UserDetails {
     private LocalDateTime currentDateTime;
     @Column(columnDefinition = "bigint default 0")
     private long views = 0;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public static UserResponse userToUserResponseWithToken(User user, String token){
         return new UserResponse(

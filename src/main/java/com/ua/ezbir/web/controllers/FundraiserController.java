@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/fundraiser")
+@RequestMapping("/user/fundraiser")
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class FundraiserController {
     private final FundraiserService fundraiserService;

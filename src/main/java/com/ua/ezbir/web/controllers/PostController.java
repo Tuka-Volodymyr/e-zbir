@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
+@RequestMapping("/user/post")
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class PostController {
     private final PostService postService;

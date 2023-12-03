@@ -1,10 +1,12 @@
 package com.ua.ezbir.services.impl;
 
 import com.ua.ezbir.config.UserAuthenticationProvider;
+import com.ua.ezbir.domain.Role;
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.domain.exceptions.BadRequestException;
 import com.ua.ezbir.domain.exceptions.UnauthorizedException;
 import com.ua.ezbir.domain.exceptions.UserNotFoundException;
+import com.ua.ezbir.repository.RoleRepository;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.MinioService;
 import com.ua.ezbir.services.UserService;
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserAuthenticationProvider userAuthenticationProvider;
     private final MinioService minioService;
-
+    private final RoleRepository roleRepository;
 
     @Override
     public UserResponse login(LoginRequest request) {
@@ -105,27 +107,36 @@ public class UserServiceImpl implements UserService {
         if(userExist.isPresent()) {
             throw new BadRequestException("Email has already used");
         }
-
+        Role role=new Role();
+        if(isTableEmpty()){
+            role.setName("ADMIN");
+        }else {
+            role.setName("USER");
+        }
         User user = User.builder()
                 .fullName(userDto.getUsername())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .fundraiserList(new LinkedList<>())
                 .currentDateTime(LocalDateTime.now())
+                .role(role)
                 .build();
+        session.setAttribute("role",role);
         session.setAttribute("user",user);
     }
-
-
-
-
+    public boolean isTableEmpty() {
+        long count = userRepository.count();
+        return count == 0;
+    }
 
     @Override
     public UserResponse checkCodeVerification(String userCode, HttpSession session) {
         String code = (String) session.getAttribute("codeVerification");
         codesIsEquals(code,userCode);
         User user = (User) session.getAttribute("user");
-        saveUser(user); // save user in db
+        Role role =(Role) session.getAttribute("role");
+        roleRepository.save(role);
+        saveUser(user); // save user in dbR
         return User.userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
     }
 

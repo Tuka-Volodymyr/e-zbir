@@ -22,6 +22,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
     private final MailService mailService;
@@ -39,7 +40,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/user/search")
+    @GetMapping("/search")
     public ResponseEntity<List<User>> searchUsers(@RequestParam("keyword") String keyword) {
         return new ResponseEntity<>(userService.searchUsers(keyword), HttpStatus.OK);
     }
@@ -55,12 +56,12 @@ public class UserController {
         return new ResponseEntity<>(userService.checkCodeVerification(code, session),HttpStatus.OK);
     }
 
-    @PostMapping(path = "/user/add/photo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/add/photo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> addPhoto(@RequestParam("file") MultipartFile file) throws IOException {
         userService.addPhoto(file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PostMapping("/user/add/info")
+    @PostMapping("/add/info")
     public ResponseEntity<?> addInfo(@RequestParam("info") String info) {
         userService.addInfoAboutYourself(info);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -81,7 +82,7 @@ public class UserController {
         userService.changePassword(passwordDto,session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("/get/user")
+    @GetMapping("/get")
     public ResponseEntity<UserResponse> getUser(@RequestParam("id") long id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }

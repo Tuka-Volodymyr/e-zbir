@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,7 +65,9 @@ public class UserAuthenticationProvider {
         User user = userRepository
                 .findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
-        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().getName());
+
+        return new UsernamePasswordAuthenticationToken(user, null, Collections.singleton(authority));
     }
 
 }
