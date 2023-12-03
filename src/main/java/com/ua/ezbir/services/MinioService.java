@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 
 public interface MinioService {
-    void upload(MultipartFile file, String path);
+    String upload(MultipartFile file, String path);
 
     void createBucket();
 

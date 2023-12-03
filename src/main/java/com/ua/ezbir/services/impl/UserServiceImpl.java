@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -129,14 +130,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse addPhoto(MultipartFile file) {
+    @Transactional
+    public void addPhoto(MultipartFile file) {
         User user = getUser();
         String extension = "." + Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
         String path = String.format("/%d/photo%s", user.getUser_id(), extension);
-        minioService.upload(file, path);
-        user.setPhotoPath(path);
+        String photoUrl = minioService.upload(file, path); // method upload returns url
+        user.setPhotoUrl(photoUrl);
         saveUser(user);
-        return User.userToUserResponseWithToken(user,null);
     }
 
     @Override

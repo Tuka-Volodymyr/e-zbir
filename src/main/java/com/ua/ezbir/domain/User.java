@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class User implements UserDetails {
     private String fullName;
     private String password;
     private String infoAboutYourself;
-    private String photoPath;
+    private String photoUrl;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     @JsonManagedReference
@@ -43,7 +42,7 @@ public class User implements UserDetails {
                 user.getUser_id(),
                 user.getFullName(),
                 user.getInfoAboutYourself(),
-                user.getPhotoPath(),
+                user.getPhotoUrl(),
                 user.getFundraiserList(),
                 token,
                 user.getViews());

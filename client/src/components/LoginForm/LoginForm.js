@@ -35,7 +35,7 @@ const LoginForm = (props) =>{
                 window.localStorage.setItem('auth_token', response.data.token)
                 window.localStorage.setItem('username', response.data.username)
                 window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
-                window.localStorage.setItem('bytePhoto', response.data.bytePhoto)
+                window.localStorage.setItem('photoUrl', response.data.photoUrl)
                 window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
                 window.localStorage.setItem('email', data.email)
                 window.localStorage.setItem('login', true)

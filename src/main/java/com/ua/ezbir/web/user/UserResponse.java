@@ -8,7 +8,7 @@ public record UserResponse(
         long userId,
         String username,
         String infoAboutYourself,
-        String bytePhoto,
+        String photoUrl,
         List<Fundraiser> fundraiserList,
         String token,
         long views

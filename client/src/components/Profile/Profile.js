@@ -24,13 +24,16 @@ const Profile = (props) =>{
         {checkLogin === 'logout' ? <Navigate to='/'/> : ""}{/*Redirect to checkForm*/}
         <div className={ProfileCss.profile}>
             <div className={ProfileCss.userAvatar}>
-                <Avatar shape="square" size={256} icon='G'></Avatar>
+                {window.localStorage.getItem('photoUrl') ? (
+                    <img src={window.localStorage.getItem('photoUrl')} alt="User Avatar" style={{ width: '256px', height: '256px' }} />
+                ) : (
+                    <Avatar shape="square" size={256} icon="user" />
+                )}
             </div>
             <div className={ProfileCss.userInfo}>
                 <p className={ProfileCss.username}>{window.localStorage.getItem('username')}</p>
                 <p className={ProfileCss.email}>{window.localStorage.getItem('email')}</p>
             </div>
-
 
 
             <div className={ProfileCss.settings}>

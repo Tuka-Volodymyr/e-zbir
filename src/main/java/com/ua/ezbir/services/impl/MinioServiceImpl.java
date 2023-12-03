@@ -20,7 +20,7 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     @Transactional
-    public void upload(MultipartFile file, String path) {
+    public String upload(MultipartFile file, String path) {
         try {
             createBucket(); // create bucket in minio
         } catch (Exception e) {
@@ -37,6 +37,7 @@ public class MinioServiceImpl implements MinioService {
             throw new MinioException("File upload failed");
         }
         saveFile(inputStream, path);
+        return minioProperties.getUrl() + "/" + minioProperties.getBucket() + path;
     }
 
     @Override
