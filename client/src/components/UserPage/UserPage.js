@@ -2,25 +2,41 @@ import axios from "axios";
 import {useSelector} from "react-redux";
 
 import UserPageCss from './UserPage.module.css'
+import {useEffect, useState} from "react";
 
 const UserPage = (props) =>{
+    const [userInfo, setUserInfo] = useState({})
+
 
     const id = useSelector(state => state.userId.id)
 
-    console.log(id)
 
 
-    axios.get(`http://localhost:8080/user/get?id=${id}`)
-        .then(response => {
-            console.log(response)
-        })
-        .catch(error =>{
-            console.log(error)
-        })
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/user/get?id=${id}`);
+                console.log(response); // Перевірте, які поля містить відповідь від сервера
+                setUserInfo({
+                    photo: response.data.photoUrl,
+                    username: response.data.username,
+                    fundraiser: response.data.fundraiserList,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        if (id) {
+            fetchData();
+        }
+    }, [id]);
+
 
     return(
     <div className = {UserPageCss.content}>
-        Hello
+
+        <div>{userInfo.username}</div>
     </div>
     );
 };

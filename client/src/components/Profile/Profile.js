@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Profile = (props) =>{
     const [selectedFile, setSelectedFile] = useState(null);
-
+    const [photo, setPhoto] = useState('')
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
@@ -31,7 +31,9 @@ const Profile = (props) =>{
                 withCredentials: true /* Дозволяє передачу сесійних куки */
             })
                 .then(response =>{
-                    console.log(response);
+                    setPhoto(response.data.photoUrl)
+                    console.log(response)
+
                 })
 
             console.log('Фото успішно відправлено!');
@@ -59,7 +61,7 @@ const Profile = (props) =>{
                             <input type="file" onChange={handleFileChange} accept="image/*" />
                             <button onClick={handleUpload}>Відправити фото</button>
                         </div>
-                        <img src="http://localhost:9000/ezbir-files/2/photo.jpg" alt=""/>
+                        <img src='' alt=""/>
                     </div>
                 </div>
                 <div className={ProfileCss.userInfo}>
