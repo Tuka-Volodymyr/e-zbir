@@ -57,9 +57,8 @@ public class UserController {
     }
 
     @PostMapping(path = "/add/photo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> addPhoto(@RequestParam("file") MultipartFile file) throws IOException {
-        userService.addPhoto(file);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<String> addPhoto(@RequestParam("file") MultipartFile file) throws IOException {
+        return new ResponseEntity<>(userService.addPhoto(file),HttpStatus.OK);
     }
     @PostMapping("/add/info")
     public ResponseEntity<?> addInfo(@RequestParam("info") String info) {

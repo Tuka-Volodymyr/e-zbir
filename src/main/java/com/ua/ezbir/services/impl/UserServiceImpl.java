@@ -142,13 +142,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addPhoto(MultipartFile file) {
+    public String addPhoto(MultipartFile file) {
         User user = getUser();
         String extension = "." + Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
         String path = String.format("/%d/photo%s", user.getUser_id(), extension);
         String photoUrl = minioService.upload(file, path); // method upload returns url
         user.setPhotoUrl(photoUrl);
         saveUser(user);
+        return photoUrl;
     }
 
     @Override
