@@ -1,13 +1,9 @@
-import {Avatar, message, Upload} from "antd";
-import ImgCrop from 'antd-img-crop';
-
 import ProfileCss from './Profile.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";
 import ProfileSettings from "./ProfileSettings/ProfileSettings";
 import NewZbir from "./NewZbir/NewZbir.js";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Navigate} from "react-router-dom";
-import {LoadingOutlined, PlusOutlined} from "@ant-design/icons";
 import axios from "axios";
 
 const Profile = (props) =>{
@@ -63,7 +59,7 @@ const Profile = (props) =>{
                             <input type="file" onChange={handleFileChange} accept="image/*" />
                             <button onClick={handleUpload}>Відправити фото</button>
                         </div>
-
+                        <img src="http://localhost:9000/ezbir-files/2/photo.jpg" alt=""/>
                     </div>
                 </div>
                 <div className={ProfileCss.userInfo}>
