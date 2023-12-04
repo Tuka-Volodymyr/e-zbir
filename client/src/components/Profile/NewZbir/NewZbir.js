@@ -29,7 +29,7 @@ const NewZbir = (props) =>{
             const formData = form.getFieldsValue();
             console.log(formData.category.join(" "))
 
-            axios.post('http://localhost:8080/fundraiser/add', {
+            axios.post('http://localhost:8080/user/fundraiser/add', {
                 name: formData.name,
                 suma: formData.suma,
                 categories: formData.category,

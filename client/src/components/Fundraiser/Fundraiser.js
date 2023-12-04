@@ -7,7 +7,7 @@ const Fundraiser = (props) => {
     const [itemList, setItemList] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/fundraiser/get/all')
+        axios.get('http://localhost:8080/user/fundraiser/get/all')
             .then(response => {
                 console.log(response.data)
                 const data = response.data.map(el => ({

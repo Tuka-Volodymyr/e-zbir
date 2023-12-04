@@ -25,7 +25,7 @@ const LoginForm = (props) =>{
     const onSubmit = (data)=>{
         reset()
 
-        axios.post('http://localhost:8080/login',{
+        axios.post('http://localhost:8080/user/login',{
             email:data.email,
             password:data.password,
         },{withCredentials: true /* Дозволяє передачу сесійних куки */})

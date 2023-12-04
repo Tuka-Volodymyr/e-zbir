@@ -10,7 +10,7 @@ const UserPage = (props) =>{
     console.log(id)
 
 
-    axios.get(`http://localhost:8080/get/user?id=${id}`)
+    axios.get(`http://localhost:8080/user/get?id=${id}`)
         .then(response => {
             console.log(response)
         })

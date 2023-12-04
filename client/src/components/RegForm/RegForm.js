@@ -35,7 +35,7 @@ const RegForm = (props) =>{
 
         dispatch({type:'SET_EMAIL', payload: data.email})
 
-        axios.post('http://localhost:8080/register', {
+        axios.post('http://localhost:8080/user/register', {
             username: data.fullName,
             email: data.email,
             password: data.password,
@@ -44,7 +44,7 @@ const RegForm = (props) =>{
           .then(function (response) {
               setStatus(response.status);
 
-              axios.post('http://localhost:8080/send/code?email='+`${data.email}`, {
+              axios.post('http://localhost:8080/user/send/code?email='+`${data.email}`, {
                   email: data.email,
               },{withCredentials: true /* Дозволяє передачу сесійних куки */})
                   .then(function (response){

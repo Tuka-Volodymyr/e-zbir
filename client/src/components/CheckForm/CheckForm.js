@@ -19,7 +19,7 @@ const CheckForm = (props) =>{
     const onSubmit = (data) => {
         reset()
 
-        axios.post(`http://localhost:8080/check/code?code=${data.code}`,{
+        axios.post(`http://localhost:8080/user/check/code?code=${data.code}`,{
             code: data.code,
         },{withCredentials: true /* Дозволяє передачу сесійних куки */})
             .then((response) => {
