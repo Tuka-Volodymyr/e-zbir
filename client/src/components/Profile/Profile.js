@@ -1,5 +1,5 @@
 import ProfileCss from './Profile.module.css'
-import CollectionCard from "../CollectionCard/CollectionCard";
+// import CollectionCard from "../CollectionCard/CollectionCard";
 import ProfileSettings from "./ProfileSettings/ProfileSettings";
 import NewZbir from "./NewZbir/NewZbir.js";
 import React, {useState} from "react";
