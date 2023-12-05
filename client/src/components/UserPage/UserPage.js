@@ -1,22 +1,20 @@
 import axios from "axios";
 import {useSelector} from "react-redux";
+import './UserPage.module.css';
 
 import UserPageCss from './UserPage.module.css'
 import {useEffect, useState} from "react";
 
 const UserPage = (props) =>{
+
     const [userInfo, setUserInfo] = useState({})
-
-
     const id = useSelector(state => state.userId.id)
-
-
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/user/get?id=${id}`);
-                console.log(response); // Перевірте, які поля містить відповідь від сервера
+                console.log(response);
                 setUserInfo({
                     photo: response.data.photoUrl,
                     username: response.data.username,
@@ -32,11 +30,15 @@ const UserPage = (props) =>{
         }
     }, [id]);
 
-
     return(
     <div className = {UserPageCss.content}>
-
-        <div>{userInfo.username}</div>
+        <div className={UserPageCss.photo}> Photo{/*Photo: {userInfo.photoUrl}*/}</div>
+        <div className={UserPageCss.label}> {userInfo.username}</div>
+        <ul className={UserPageCss.fundraiserList}>
+            {/*<h3>Збір на медичне обладнання</h3>*/}
+            {/*<h3>Збір на їжу</h3>*/}
+            {/*<h3>Збір на бронежилети </h3>*/}
+        </ul>
     </div>
     );
 };
