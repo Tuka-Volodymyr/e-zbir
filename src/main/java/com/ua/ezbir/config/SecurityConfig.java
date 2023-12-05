@@ -46,6 +46,7 @@ public class SecurityConfig {
                                 "/user/change/password",
                                 "/user/login",
                                 "/user/fundraiser/get/all",
+                                "/user/fundraiser/get/search",
                                 "/user/fundraiser/get").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
