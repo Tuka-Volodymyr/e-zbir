@@ -16,26 +16,35 @@ import Fundraiser from "./components/Fundraiser/Fundraiser";
 import UserPage from "./components/UserPage/UserPage";
 
 import './App.css';
+import FundraiserItem from "./components/Fundraiser/FundraiserItem/FundraiserItem";
 
 const App = (props) =>{
+
+    if(window.sessionStorage.getItem('isLogin') == null){
+        window.sessionStorage.setItem('isLogin', false)
+    }
+
     return (
         <BrowserRouter>
             <div className="content">
-                {<Header />}
+                <Header />
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="/main" element={<MainPage />} />
-                    <Route element={<PrivateRoute redirect = 'profile' />}>
+                    <Route element={<PrivateRoute role='user' redirect = 'profile' />}>
                         <Route path="/login" element={<LoginForm />} />
                     </Route>
-                    <Route element={<PrivateRoute redirect = 'profile' />}>
+                    <Route element={<PrivateRoute role='user' redirect = 'profile' />}>
                         <Route path="/register" element={<RegForm />} />
                     </Route>
                     <Route path="/checkform" element={<CheckForm />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route element={<PrivateRoute role='anonim' redirect = 'login' />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
                     <Route path="/ver" element={<ForgPassw />} />
-                    <Route path="/zbir" element={<Fundraiser />} />
-                    <Route path="/user/*" element={<UserPage />} />
+                    <Route path="/fundraiser" element={<Fundraiser />} />
+                    <Route path="/fundraiser/:id" element={<FundraiserItem />} />
+                    <Route path="/user/:id" element={<UserPage />} />
                 </Routes>
             </div>
         </BrowserRouter>

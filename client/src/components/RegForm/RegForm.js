@@ -56,6 +56,7 @@ const RegForm = (props) =>{
 
           })
           .catch(function (error) {
+              console.log(error)
               setError(error.response.data.message);
           });
     }

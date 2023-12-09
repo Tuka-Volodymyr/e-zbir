@@ -6,7 +6,7 @@ import HeaderCss from "../Header/Header.module.css";
 import {NavLink} from "react-router-dom";
 // import CollectionCardCss from "../CollectionCard/CollectionCard.module.css";
 const MainPage = (props) =>{
-
+    console.log('1')
     const initialCollectionsToShow = 0;
     const[collectionsToShow, setCollectionsToShow] = useState(initialCollectionsToShow);
 

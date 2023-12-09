@@ -1,23 +1,15 @@
-import CollectionCardCss from './CollectionCard.module.css'
 import {NavLink} from "react-router-dom";
-import {useDispatch} from "react-redux";
+
+import CollectionCardCss from './CollectionCard.module.css'
+
 const CollectionCard = (props) =>{
-
-    const dispatch = useDispatch();
-
-    const setId = () =>{
-        dispatch({type:'SET_USER_ID', payload: props.userId})
-    }
-
-
-
     return(
     <div className = {CollectionCardCss.content}>
         <div className={CollectionCardCss.block1}>
-            <h2 className={CollectionCardCss.nameZbir}>{props.nameZbir}</h2>
+            <h2 ><NavLink className={CollectionCardCss.nameZbir} to={`/fundraiser/${props.fundraiserId}`}> {props.nameZbir}</NavLink></h2>
             <br/>
             <p className={CollectionCardCss.about}>{props.description}</p>
-            <p>Автор: <br/>  <NavLink onClick={setId} to={`/user/${props.userId}`}>{props.username}</NavLink></p>
+            <p>Автор: <br/>  <NavLink to={`/user/${props.userId}`}>{props.username}</NavLink></p>
         </div>
         <div className={CollectionCardCss.block2}>
             <p>Очікувана Сума:</p>

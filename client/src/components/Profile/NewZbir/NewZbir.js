@@ -3,6 +3,7 @@ import {Button, Col, Drawer, Form, Input, Row, Select, Space} from 'antd';
 
 import NewZbirCss from './NewZbir.module.css'
 import axios from "axios";
+import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -27,7 +28,7 @@ const NewZbir = (props) =>{
             setOpen(false)
             //get value from form new zbir
             const formData = form.getFieldsValue();
-            console.log(formData.category.join(" "))
+            console.log(formData)
 
             axios.post('http://localhost:8080/user/fundraiser/add', {
                 name: formData.name,
@@ -38,12 +39,12 @@ const NewZbir = (props) =>{
                 description: formData.description,
             }, {
                 headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem('auth_token')}`,
+                    Authorization: `Bearer ${window.sessionStorage.getItem('auth_token')}`,
                 },
                 withCredentials: true /* Дозволяє передачу сесійних куки */
             })
                 .then(response => {
-                    console.log(response);
+                    window.sessionStorage.setItem('fundraiser',JSON.stringify(response.data))
                 })
                 .catch(error => {
                     console.log(error);
@@ -148,18 +149,50 @@ const NewZbir = (props) =>{
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item
-                                name="cards"
-                                label="Номер банківської карти"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Введіть номер банківськох карти',
-                                    },
-                                ]}
-                            >
-                                <Input placeholder="1234 5678 9012 3456"/>
-                            </Form.Item>
+                            <Form.List  name="cards">
+                                {(fields, { add, remove }) => (
+                                    <Form.Item label='Реквізити' style={{marginTop:'0px'}}>
+                                        {fields.map(({ key, name, ...restField }, index) => (
+                                            <Space
+                                                key={key}
+                                                style={{
+                                                    display: 'flex',
+                                                    // alignItems: 'center'
+                                                }}
+
+                                            >
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[name, 'cardType']}
+                                                    fieldKey={[name, 'cardType', index]} // Corrected 'fieldKey' here
+                                                    rules={[{ required: true, message: 'Оберіть банк' }]}
+                                                >
+                                                    <Select style={{ width: '200px' }} placeholder="Банк">
+                                                        <Option value="mono">Monobank</Option>
+                                                        <Option value="private24">Privat24</Option>
+                                                        <Option value="pumb">PUMB</Option>
+                                                        <Option value="kredo">Kredo Bank</Option>
+                                                    </Select>
+                                                </Form.Item>
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[name, 'cardNumber']}
+                                                    fieldKey={[name, 'cardNumber', index]}
+                                                    rules={[{ required: true, message: 'Введіть номер карти' }]}
+                                                >
+                                                    <Input style={{ width: '450px' }} placeholder="Номер карти" />
+                                                </Form.Item>
+                                                <MinusCircleOutlined onClick={() => remove(name)} />
+                                            </Space>
+                                        ))}
+                                        <Form.Item>
+                                            <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                                Додати реквізити
+                                            </Button>
+                                        </Form.Item>
+                                    </Form.Item>
+                                )}
+                            </Form.List>
                         </Col>
                     </Row>
                     <Row gutter={16}>

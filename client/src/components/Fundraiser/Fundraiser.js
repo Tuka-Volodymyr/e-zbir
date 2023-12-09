@@ -15,7 +15,8 @@ const Fundraiser = (props) => {
                     nameZbir: el.name,
                     description: el.description,
                     suma : el.suma,
-                    id : el.userId
+                    id : el.userId,
+                    fundraiserId: el.fundraiserId,
                 }));
                 setItemList(data);
             })
@@ -35,6 +36,7 @@ const Fundraiser = (props) => {
                     suma = {item.suma}
                     username = {item.username}
                     userId = {item.id}
+                    fundraiserId = {item.fundraiserId}
                 />
             ))}
         </div>

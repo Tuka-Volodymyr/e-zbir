@@ -1,12 +1,19 @@
 import {Navigate, Outlet} from "react-router-dom";
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 
 const PrivateRoute = (props) =>{
-    const isLogin = useSelector(state => state.userInfo)
+    const [isLogin, setIsLogin] = useState(window.sessionStorage.getItem('isLogin'))
+
+    useEffect(() => {
+        setIsLogin(window.sessionStorage.getItem('isLogin'))
+    }, [window.sessionStorage.getItem('isLogin')]);
+
+    let login;
+    props.role === 'user' ? login = true : login = false
 
     return(
-        isLogin.login === 'true' ? <Navigate to = {`/${props.redirect}`}/> : <Outlet/>
+        isLogin === `${login}` ? <Navigate to = {`/${props.redirect}`}/> : <Outlet/>
     );
 };
 

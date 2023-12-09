@@ -32,30 +32,18 @@ const LoginForm = (props) =>{
             .then(function (response){
                 console.log(response)
                 setStatus(response.status);
-                window.localStorage.setItem('auth_token', response.data.token)
-                window.localStorage.setItem('username', response.data.username)
-                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
-                window.localStorage.setItem('photoUrl', response.data.photoUrl)
-                window.localStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
-                window.localStorage.setItem('email', data.email)
-                window.localStorage.setItem('login', true)
+                window.sessionStorage.setItem('auth_token', response.data.token)
+                window.sessionStorage.setItem('username', response.data.username)
+                window.sessionStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.sessionStorage.setItem('photoUrl', response.data.photoUrl)
+                window.sessionStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.sessionStorage.setItem('email', data.email)
+                window.sessionStorage.setItem('fundraiser', JSON.stringify(response.data.fundraiserList))
+                window.sessionStorage.setItem('isLogin', true)
             })
             .catch(function (error){
                 console.log(error);
             });
-    }
-
-    const Logout = () =>{
-        console.log('1')
-        axios.post('http://localhost:8080/user/search?keyword=rus',{
-
-        })
-            .then((response) =>{
-                console.log(response)
-            })
-            .catch((error) =>{
-                console.log(error)
-            })
     }
 
     return(

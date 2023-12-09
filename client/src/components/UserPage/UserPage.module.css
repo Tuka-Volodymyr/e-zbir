@@ -1,35 +1,63 @@
-.UserPageCss.content {
+.content{
+    display: grid;
+    grid-template-rows: 300px 1fr;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.profile{
+    display: flex;
+    margin-top: 20px;
+}
+.userInfo{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+.username{
+    font-size: 28px;
+}
+.userCard{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: red;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
-.UserPageCss.photo {
-    width: 150px;
-    height: 150px;
-    border: 2px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.UserPageCss.photo img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.UserPageCss.label {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.UserPageCss.fundraiserList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.UserPageCss.fundraiserList h3 {
-    font-size: 16px;
-    margin: 5px 0;
+.userCard h1{
+    font-family: E-Ukraine-Head;
+    font-size: 30px;
+    font-weight: 200;
 }
 
+.avatar{
+    width: 256px;
+    display: flex;
+    flex-direction: column;
+}
+
+.imageBlock{
+    width: 256px;
+    height: 256px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #000000;
+}
+
+.avatarImg{
+    width: 256px;
+    height: 256px;
+    object-fit: contain;
+    border: 2px solid #084A16;
+    border-radius: 10px;
+}
+
+.inputPhoto{
+    width: 100px;
+}
+
+.sendPhoto{
+    cursor: pointer;
+}
