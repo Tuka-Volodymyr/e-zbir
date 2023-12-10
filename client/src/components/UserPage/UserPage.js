@@ -8,8 +8,8 @@ import './UserPage.module.css';
 import UserPageCss from './UserPage.module.css'
 import {useParams} from "react-router-dom";
 import ProfileCss from "../Profile/Profile.module.css";
-import ProfileSettings from "../Profile/ProfileSettings/ProfileSettings";
-import NewZbir from "../Profile/NewZbir/NewZbir";
+// import ProfileSettings from "../Profile/ProfileSettings/ProfileSettings";
+// import NewZbir from "../Profile/NewZbir/NewZbir";
 import CollectionCard from "../CollectionCard/CollectionCard";
 
 const UserPage = (props) =>{
