@@ -9,7 +9,9 @@ const CollectionCard = (props) =>{
             <h2 ><NavLink className={CollectionCardCss.nameZbir} to={`/fundraiser/${props.fundraiserId}`}> {props.nameZbir}</NavLink></h2>
             <br/>
             <p className={CollectionCardCss.about}>{props.description}</p>
-            <p>Автор: <br/>  <NavLink to={`/user/${props.userId}`}>{props.username}</NavLink></p>
+            <br/>
+            <p>Реквізити: 444114423034538</p>
+            <p>Автор: <NavLink to={`/user/${props.userId}`}>{props.username}</NavLink></p>
         </div>
         <div className={CollectionCardCss.block2}>
             <p>Очікувана Сума:</p>

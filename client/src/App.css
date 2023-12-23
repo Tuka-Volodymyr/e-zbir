@@ -91,7 +91,10 @@
     font-size: 16px;
 
 }
+body{
+    background:#f0f5f2;
 
+}
 
 a{
     text-decoration: none;

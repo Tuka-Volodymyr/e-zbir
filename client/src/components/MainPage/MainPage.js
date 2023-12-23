@@ -1,10 +1,9 @@
 import React, {useState} from "react";
+import {NavLink} from "react-router-dom";
 
 import MainPageCss from './MainPage.module.css'
 import CollectionCard from "../CollectionCard/CollectionCard";
-import HeaderCss from "../Header/Header.module.css";
-import {NavLink} from "react-router-dom";
-// import CollectionCardCss from "../CollectionCard/CollectionCard.module.css";
+
 const MainPage = (props) =>{
     console.log('1')
     const initialCollectionsToShow = 0;
@@ -28,9 +27,9 @@ const MainPage = (props) =>{
             <CollectionCard  key = {2} nameZbir = 'На Ліки' name='Хворий Володя' />
             <CollectionCard  key = {3} nameZbir = 'На машину' name='Ivan' />
             <CollectionCard  key = {4} nameZbir = 'На Дрон' name='Програміст Коля' />
-            <div className={HeaderCss.profile}>
-                <NavLink onClick={handleShowMore} to='/fundraiser'>
-                    <button className={MainPageCss.buttonShowMore} onClick={handleShowMore}>Показати ще</button>
+            <div className={MainPageCss.profile}>
+                <NavLink to='/fundraiser'>
+                    показати ще
                 </NavLink>
             </div>
         </div>

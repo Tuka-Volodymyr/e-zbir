@@ -1,8 +1,8 @@
-body {
-    margin: 0;
-    background: #E4E4E4;
+.content{
+   display: flex;
+    justify-content: center;
+    background-color: #fff;
 }
-
 .logo {
     color: #084A16;
     text-align: center;
@@ -11,17 +11,15 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-left: 100px;
-    width: 400px;
+
 }
 
 .rectangle {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 100px;
-    background-color: #fff;
-    overflow: visible;
+    position: relative;
 }
 
 .list{
@@ -38,9 +36,8 @@ nav a:hover{
 }
 .iconsBlock{
     display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    margin-right: 100px;
+    position: absolute;
+    right: 0;
 }
 .iconsBlock div{
     margin: 0px 20px 0px 20px;

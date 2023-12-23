@@ -1,11 +1,10 @@
-
+import React, {useState} from "react";
 import {Navigate, NavLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 
 import LoginFormCss from './Login.module.css'
 import RegFormCss from "../RegForm/RegForm.module.css";
-import React, {useState} from "react";
 const LoginForm = (props) =>{
 
     const [status, setStatus] = useState(0)

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {Button, Col, Drawer, Form, Input, Row, Select, Space} from 'antd';
-
-import NewZbirCss from './NewZbir.module.css'
 import axios from "axios";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
+
+
+import NewZbirCss from './NewZbir.module.css'
 
 const { Option } = Select;
 
@@ -64,7 +65,7 @@ const NewZbir = (props) =>{
             <Drawer
                 title="Створення нового збору"
                 placement='bottom'
-                height={650}
+                height={450}
                 onClose={onClose}
                 open={open}
                 styles={{

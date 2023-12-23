@@ -1,12 +1,14 @@
-import ProfileCss from './Profile.module.css'
-// import CollectionCard from "../CollectionCard/CollectionCard";
-import ProfileSettings from "./ProfileSettings/ProfileSettings";
-import NewZbir from "./NewZbir/NewZbir.js";
 import React, {useEffect, useState} from "react";
 import {Navigate} from "react-router-dom";
 import axios from "axios";
-import CollectionCard from "../CollectionCard/CollectionCard";
 import {message} from "antd";
+
+import ProfileCss from './Profile.module.css'
+
+import ProfileSettings from "./ProfileSettings/ProfileSettings";
+import NewZbir from "./NewZbir/NewZbir.js";
+import CollectionCard from "../CollectionCard/CollectionCard";
+
 
 const Profile = (props) =>{
     const [checkLogin, setCheckLogin] = useState('')
@@ -43,7 +45,7 @@ const Profile = (props) =>{
                 })
 
             console.log('Фото успішно відправлено!');
-            message.success('Фото успішно встановлено! Оновіть будь ласка сторінку');
+            message.success('Фото успішно встановлено!');
         } catch (error) {
             console.error('Помилка відправлення фото:', error);
         }
@@ -92,6 +94,7 @@ const Profile = (props) =>{
                         suma = {item.suma}
                         username = {window.sessionStorage.getItem('username')}
                         userId = {item.id}
+                        fundraiserId = {item.fundraiserId}
                     />
                 )) : ''}
             </div>

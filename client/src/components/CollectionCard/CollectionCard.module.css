@@ -14,10 +14,14 @@
     font-weight: 200;
     color: #084A16;
 }
+.nameZbir:hover{
+    border-bottom: 1px solid #084A16;
+}
 
 .about{
     font-size: 14px;
     font-weight: 100;
+    letter-spacing: 1px;
 }
 .block1{
     padding-top: 20px;

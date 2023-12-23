@@ -1,0 +1,109 @@
+.content{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    height: 100%;
+}
+
+.fundraiserInfo{
+    width: 100%;
+    padding: 10px;
+}
+
+.fundraiser_name_status{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fundraiserName{
+    font-family: E-Ukraine-Head;
+    font-size: 38px;
+    color: #084A16;
+    font-weight: 200;
+}
+.description{
+    letter-spacing: 1px;
+    font-weight: 100;
+    margin-top: 20px;
+}
+.description h2{
+    font-size: 24px;
+    color: #084A16;
+    font-weight: 100;
+}
+.description p{
+    padding: 5px;
+}
+
+.categoryBlock{
+    margin-top: 20px;
+}
+.categoryBlock h2{
+    font-size: 24px;
+    color: #084A16;
+    font-weight: 100;
+}
+.category{
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.category h2{
+    font-size: 24px;
+    color: #084A16;
+    font-weight: 100;
+}
+
+.categoryItem{
+    margin: 5px;
+    padding: 10px;
+    background: #fff;
+    font-weight: 100;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.cards{
+    margin-top: 20px;
+}
+
+.cards h2{
+    font-size: 24px;
+    font-weight: 100;
+    color: #084A16;
+}
+.card{
+    margin: 10px;
+    font-weight: 100;
+}
+
+.sum{
+    margin-top: 20px;
+}
+.sum h2{
+    font-size: 24px;
+    font-weight: 100;
+    color: #084A16;
+}
+.sum div{
+    font-size: 38px;
+    font-weight: 100;
+    color: #1056A7;
+    padding: 10px;
+}
+
+.posts{
+    width: 500px;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.posts h2{
+    font-size: 24px;
+    font-weight: 100;
+    color: #084A16;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
