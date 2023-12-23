@@ -47,7 +47,18 @@ public class SecurityConfig {
                                 "/user/login",
                                 "/user/fundraiser/get/all",
                                 "/user/fundraiser/get/search",
-                                "/user/fundraiser/get").permitAll()
+                                "/user/fundraiser/get",
+                                "/api/v1/auth/**",
+                                "/v2/api-docs",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-resources",
+                                "/swagger-resources/**",
+                                "/configuration/ui",
+                                "/configuration/security",
+                                "/swagger-ui/**",
+                                "/webjars/**",
+                                "/swagger-ui.html").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().authenticated())
