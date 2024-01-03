@@ -40,6 +40,7 @@ public class FundraiserServiceImpl implements FundraiserService {
 
         // save fundraiser in db
         fundraiserRepository.save(fundraiser);
+
         // add new fundraiser in user list
         fundraiserList.add(fundraiser);
         user.setFundraiserList(fundraiserList);
