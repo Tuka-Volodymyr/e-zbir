@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+//merge
 @Service
 @RequiredArgsConstructor
 public class FundraiserServiceImpl implements FundraiserService {
