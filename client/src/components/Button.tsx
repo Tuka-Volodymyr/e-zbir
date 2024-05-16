@@ -9,7 +9,7 @@ type ButtonProps = {
 }
 
 const Button: React.FC<ButtonProps> = ({primary, secondary, small, value, className}) => {
-    let buttonStyle = "rounded-full w-[233px] h-[56px] text-xl flex justify-center items-center"; // Загальні стилі кнопки
+    let buttonStyle = "rounded-full w-[233px] h-[56px] text-xl flex justify-center items-center";
 
     if (primary) {
         buttonStyle += " bg-black text-white text-[16px] hover:bg-inherit hover:text-black transition duration-300 ease-linear hover:ease-linear";

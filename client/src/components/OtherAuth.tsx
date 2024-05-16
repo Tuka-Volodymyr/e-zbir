@@ -7,7 +7,7 @@ type OtherAuthProps = {
 
 const OtherAuth: React.FC<OtherAuthProps> = ({value, link}) =>{
     return(
-        <Link href={`${link}`} className='h-[74px] w-[205px] p-[16px] border-black border-2 flex items-center text-[16px]'>
+        <Link href={`${link}`} className='h-[74px] w-[205px] p-[16px] border-black border-2 flex items-center text-[16px] cursor-pointer'>
             <section className="w-2/3">
                 {value}
             </section>

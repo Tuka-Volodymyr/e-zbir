@@ -11,20 +11,31 @@ const LoginForm: React.FC = (props) => {
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
     }
-    const handlePasswordChange = (e:ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value)
     }
-
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         axios.post('http://localhost:8080/user/login', {
-            email: email,
-            password: password
-        },{withCredentials: true /* Дозволяє передачу сесійних куки */})
-            .then((response) =>{
+                email: email,
+                password: password
+            }, {
+                withCredentials: true, /* Дозволяє передачу сесійних куки */
+            }
+        )
+            .then((response) => {
                 console.log(response)
+                window.sessionStorage.setItem('auth_token', response.data.token)
+                window.sessionStorage.setItem('username', response.data.username)
+                window.sessionStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)
+                window.sessionStorage.setItem('photoUrl', response.data.photoUrl)
+                window.sessionStorage.setItem('fundraiser', JSON.stringify(response.data.fundraiserList))
+                window.sessionStorage.setItem('userId', response.data.userId)
+                if (response.status === 200) {
+                    window.location.href = '/profile';
+                }
             })
-            .catch((error) =>{
+            .catch((error) => {
                 console.log(error)
             })
     }
