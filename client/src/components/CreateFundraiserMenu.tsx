@@ -3,6 +3,7 @@
 import {FormEvent, useState} from "react";
 import {Button, Drawer, DrawerProps, Space} from "antd";
 import FundraiserForm from "@/components/FundraiserForm";
+import axios from "axios";
 
 const CreateFundraiserMenu: React.FC = (props) =>{
     const [open, setOpen] = useState(false);
@@ -16,13 +17,25 @@ const CreateFundraiserMenu: React.FC = (props) =>{
         setOpen(false);
     };
 
-    const hundleSubmit = (e: FormEvent<HTMLFormElement>, data:any) => { // Оновлено обробник події
+    const hundleSubmit = (e: FormEvent<HTMLFormElement>, data:any) => {
         e.preventDefault()
-        console.log(data)
+        axios.post('http://localhost:8080/user/fundraiser/add', data, {
+            headers: {
+                Authorization: `Bearer ${window.sessionStorage.getItem('auth_token')}`,
+            },
+            withCredentials: true
+        })
+            .then(response =>{
+                console.log(response)
+            })
+            .catch(error =>{
+                console.log(error)
+            })
+
     };
     return(
         <>
-            <button onClick={showDrawer} className='border-2 border-black w-[80%] h-[144px]'>
+            <button onClick={showDrawer} className='border-2 border-black w-full h-[144px]'>
                 Створити новий збір
             </button>
             <Drawer

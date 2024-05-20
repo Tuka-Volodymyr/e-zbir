@@ -2,8 +2,8 @@ import React from "react";
 import LoginForm from "@/app/login/LoginForm";
 import OtherAuth from "@/components/OtherAuth";
 
-
 const Login = () => {
+
     return (
         <article className='w-3/4 bg-white flex flex-col items-center'>
             <section className='mt-[100px]'>

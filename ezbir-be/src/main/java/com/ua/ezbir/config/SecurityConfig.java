@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig {
     private final UserAuthenticationProvider userAuthenticationProvider;
     private final MinioProperties minioProperties;
-
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()

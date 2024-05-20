@@ -31,6 +31,7 @@ const LoginForm: React.FC = (props) => {
                 window.sessionStorage.setItem('photoUrl', response.data.photoUrl)
                 window.sessionStorage.setItem('fundraiser', JSON.stringify(response.data.fundraiserList))
                 window.sessionStorage.setItem('userId', response.data.userId)
+                window.sessionStorage.setItem('email', email)
                 if (response.status === 200) {
                     window.location.href = '/profile';
                 }

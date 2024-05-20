@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navigation: React.FC = (props) => {
     return (
-        <nav className='flex'>
+        <nav className='flex items-center'>
             {/* Навігація по сторінках */}
             <section className="w-2/3">
                 <ul className='flex justify-around'>
@@ -19,10 +19,10 @@ const Navigation: React.FC = (props) => {
             {/* Навігація по соц мережах */}
             <section className="w-1/3">
                 <ul className='flex justify-around'>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
+                    <li><img src="/img/fbBlack.svg" alt=""/></li>
+                    <li><img src="/img/instagramBlack.svg" alt=""/></li>
+                    <li><img src="/img/telegramBlack.svg" alt=""/></li>
+                    <li><img src="/img/twitterBlack.svg" alt=""/></li>
                 </ul>
             </section>
         </nav>

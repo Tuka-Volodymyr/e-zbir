@@ -12,12 +12,13 @@ const Footer: React.FC = (props) =>{
                     </span>
                 </h1>
             </section>
-            <section className='w-[400px] mt-10'>
+            <section className='w-[400px] mt-5'>
+                <h5 className='flex justify-center p-5'>Слідкуй за нами тут:</h5>
                 <ul className='flex justify-between'>
-                    <li><img src="/linkedin.svg" alt=""/></li>
-                    <li><img src="/linkedin.svg" alt=""/></li>
-                    <li><img src="/linkedin.svg" alt=""/></li>
-                    <li><img src="/linkedin.svg" alt=""/></li>
+                    <li><img src="/img/fbWhite.svg" alt=""/></li>
+                    <li><img src="/img/instagramWhite.svg" alt=""/></li>
+                    <li><img src="/img/telegramWhite.svg" alt=""/></li>
+                    <li><img src="/img/twitterWhite.svg" alt=""/></li>
                 </ul>
             </section>
         </footer>

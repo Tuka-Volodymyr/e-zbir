@@ -1,8 +1,11 @@
+
 import React from "react";
 import RegForm from "@/app/register/RegForm";
 import OtherAuth from "@/components/OtherAuth";
+import {useRouter} from "next/navigation";
 
 const Register: React.FC = (props) => {
+
     return (
         <article className='w-3/4 bg-white flex flex-col items-center'>
             <section className='mt-[100px]'>
