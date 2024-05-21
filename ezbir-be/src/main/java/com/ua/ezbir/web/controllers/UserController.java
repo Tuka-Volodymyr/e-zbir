@@ -3,10 +3,7 @@ package com.ua.ezbir.web.controllers;
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.services.MailService;
 import com.ua.ezbir.services.UserService;
-import com.ua.ezbir.web.user.LoginRequest;
-import com.ua.ezbir.web.user.PasswordDto;
-import com.ua.ezbir.web.user.UserDto;
-import com.ua.ezbir.web.user.UserResponse;
+import com.ua.ezbir.web.user.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -84,5 +81,10 @@ public class UserController {
     @GetMapping("/get")
     public ResponseEntity<UserResponse> getUser(@RequestParam("id") long id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserResponseWithoutToken>> getAll() {
+        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
 }

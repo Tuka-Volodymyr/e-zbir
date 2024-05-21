@@ -1,10 +1,7 @@
 package com.ua.ezbir.services;
 
 import com.ua.ezbir.domain.User;
-import com.ua.ezbir.web.user.LoginRequest;
-import com.ua.ezbir.web.user.PasswordDto;
-import com.ua.ezbir.web.user.UserDto;
-import com.ua.ezbir.web.user.UserResponse;
+import com.ua.ezbir.web.user.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,4 +40,6 @@ public interface UserService {
     void addInfoAboutYourself(String data);
 
     void saveUser(User user);
+
+    List<UserResponseWithoutToken> getAll();
 }

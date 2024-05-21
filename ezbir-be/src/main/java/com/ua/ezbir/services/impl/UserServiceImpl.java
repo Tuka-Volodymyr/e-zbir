@@ -10,10 +10,7 @@ import com.ua.ezbir.repository.RoleRepository;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
 import com.ua.ezbir.services.MinioService;
-import com.ua.ezbir.web.user.LoginRequest;
-import com.ua.ezbir.web.user.PasswordDto;
-import com.ua.ezbir.web.user.UserDto;
-import com.ua.ezbir.web.user.UserResponse;
+import com.ua.ezbir.web.user.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -85,6 +83,15 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new NullPointerException();
         }
+    }
+
+    @Override
+    public List<UserResponseWithoutToken> getAll() {
+        return userRepository
+                .findAll()
+                .stream()
+                .map(User::userToUserResponseWithoutToken)
+                .collect(Collectors.toList());
     }
 
     @Override

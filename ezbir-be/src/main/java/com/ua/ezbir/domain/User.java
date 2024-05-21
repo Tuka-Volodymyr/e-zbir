@@ -2,6 +2,7 @@ package com.ua.ezbir.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ua.ezbir.web.user.UserResponse;
+import com.ua.ezbir.web.user.UserResponseWithoutToken;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +49,16 @@ public class User implements UserDetails {
                 user.getPhotoUrl(),
                 user.getFundraiserList(),
                 token,
+                user.getViews());
+    }
+
+    public static UserResponseWithoutToken userToUserResponseWithoutToken(User user){
+        return new UserResponseWithoutToken(
+                user.getUser_id(),
+                user.getFullName(),
+                user.getInfoAboutYourself(),
+                user.getPhotoUrl(),
+                user.getFundraiserList(),
                 user.getViews());
     }
 
