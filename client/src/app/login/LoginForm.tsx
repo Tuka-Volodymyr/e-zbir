@@ -24,7 +24,7 @@ const LoginForm: React.FC = (props) => {
             }
         )
             .then((response) => {
-                console.log(response)
+                console.log(response.data.token)
                 window.sessionStorage.setItem('auth_token', response.data.token)
                 window.sessionStorage.setItem('username', response.data.username)
                 window.sessionStorage.setItem('infoAboutYourself', response.data.infoAboutYourself)

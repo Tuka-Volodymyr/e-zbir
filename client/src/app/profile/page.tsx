@@ -39,7 +39,7 @@ const Profile: React.FC = (props) =>{
                     <p>
                         Про себе:
                         <br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{window.sessionStorage.getItem('infoAboutYourself')}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{window.sessionStorage.getItem('infoAboutYourself') == null? window.sessionStorage.getItem('infoAboutYourself') : ''}
                     </p>
 
                 </section>

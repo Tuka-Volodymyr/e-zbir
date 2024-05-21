@@ -19,6 +19,7 @@ const CreateFundraiserMenu: React.FC = (props) =>{
 
     const hundleSubmit = (e: FormEvent<HTMLFormElement>, data:any) => {
         e.preventDefault()
+        console.log(data)
         axios.post('http://localhost:8080/user/fundraiser/add', data, {
             headers: {
                 Authorization: `Bearer ${window.sessionStorage.getItem('auth_token')}`,

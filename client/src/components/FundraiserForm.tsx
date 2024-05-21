@@ -15,7 +15,7 @@
         suma: number,
         description: string,
         categories: any[],
-        creditCards: string[]
+        cards: string[]
     }
 
     const options = [
@@ -56,7 +56,7 @@
             suma: NaN,
             description: '',
             categories: [],
-            creditCards: [],
+            cards: [],
         });
 
 
@@ -92,7 +92,7 @@
             const creditCards = cardData.map(cardNumber => ({ cardNumber }));
             setFormData(prevState => ({
                 ...prevState,
-                creditCards: cardData
+                cards: cardData
             }));
         };
         const handleCategoriesChange = (selectedOptions: any) => {
