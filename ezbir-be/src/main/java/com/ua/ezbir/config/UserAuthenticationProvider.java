@@ -29,14 +29,6 @@ public class UserAuthenticationProvider {
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
 
-
-
-//    @PostConstruct
-//    protected void init() {
-//        // this is to avoid having the raw secret key available in the JVM
-//        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-//    }
-
     public String createToken(String login) {
 
         Date now = new Date();

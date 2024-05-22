@@ -10,7 +10,7 @@ const Navigation: React.FC = (props) => {
                 <ul className='flex justify-around'>
                     <Link href='/'>Головна</Link>
                     <Link href='/fundraiser'>Збори</Link>
-                    <Link href='/'>Волонтери</Link>
+                    <Link href='/volunteers'>Волонтери</Link>
                     <Link href='/about'>Про нас</Link>
                     <Link href='/profile'>Профіль</Link>
                 </ul>
