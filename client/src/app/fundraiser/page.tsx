@@ -23,7 +23,7 @@ const Fundraiser: React.FC = () => {
     const [itemList, setItemList] = useState<FundraiserData[]>([]);
 
     useEffect(() => {
-        axios.get<FundraiserData[]>('http://localhost:8080/user/fundraiser/get/all')
+        axios.get<FundraiserData[]>('http://localhost:8080/user/fundraiser/get/all', {})
             .then(response => {
                 console.log(response.data)
                 const data = response.data.map(el => ({
@@ -49,7 +49,11 @@ const Fundraiser: React.FC = () => {
 
     return (
         <section className='flex justify-center'>
+
             <ul className='w-[80%]'>
+                <input className='w-full border-2 border-black rounded-2xl p-1 mt-3 mb-3'
+                       placeholder="Пошук Збору"
+                       type="search"/>
                 {itemList.map(item => (
                     <li className='border-2 border-black w-full h-[270px] mt-3 mb-3 p-2'
                         key={item.fundraiserId}>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 interface FundraiserCardProps {
     cards: string[],
@@ -13,7 +14,7 @@ interface FundraiserCardProps {
     username: string,
     views: number
 }
-enum FundraiserCategory {
+export enum FundraiserCategory {
     Medical_Supplies_Equipment = 'Медичне обладнання',
     Support_Military_Forces = 'Підтримка військових',
     Psychological_Support = 'Психологічна підтримка',
@@ -52,8 +53,8 @@ const FundraiserCard: React.FC<FundraiserCardProps> = (
             <section className='flex flex-col h-full'>
                 <section className='flex h-[90%]'>
                     <section className='flex flex-col w-3/4'>
-                        <h3>{name}</h3>
-                        <p>Користувач: {username}</p>
+                        <Link href={`/fundraiser/${fundraiserId}`}><h2 className='hover:text-[#7c7bff] hover:transition transition'>{name}</h2></Link>
+                        <p>Користувач:  <Link href={`/user/${userId}`}><strong>{username}</strong></Link></p>
                         <div>
                             Реквізити:
                             {cards.slice(0, 3).map((card, index) => (
@@ -62,10 +63,13 @@ const FundraiserCard: React.FC<FundraiserCardProps> = (
                                 </p>
                             ))}
                         </div>
-                        <p className='w-[700px] break-words'>{truncatedDescription}</p>
+                        <p className='w-[700px] break-words'>
+                            Опис: <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{truncatedDescription}
+                        </p>
                     </section>
                     <section className='w-1/4 flex flex-col justify-center items-center'>
-                        <h3>{suma}</h3>
+                        <h3>{suma}₴</h3>
                         <h4>{!isClosed ? <p className='text-green-500'>Збір відкритий</p> :
                             <p className='text-red-400'>Збір закритий</p>}</h4>
                     </section>
