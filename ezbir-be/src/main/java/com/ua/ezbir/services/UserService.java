@@ -3,9 +3,7 @@ package com.ua.ezbir.services;
 import com.ua.ezbir.domain.User;
 import com.ua.ezbir.web.user.*;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +33,8 @@ public interface UserService {
 
     UserResponse checkCodeVerification(String code, HttpSession session);
 
-    String addPhoto(MultipartFile file) throws IOException;
+    // TODO: impl photos by aws s3
+    // String addPhoto(MultipartFile file) throws IOException;
 
     void addInfoAboutYourself(String data);
 

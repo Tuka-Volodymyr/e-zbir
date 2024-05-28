@@ -30,21 +30,26 @@ public class Fundraiser {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
+
     private float suma;
     private String name;
     private String jarLink;
     private String description;
     private boolean isClosed;
     private LocalDateTime currentDateTime;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> categories;
+
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "fundraiser")
     @JsonManagedReference
     private List<Post> posts;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> cards;
+
     @Column(columnDefinition = "bigint default 0")
-    private long views=0;
+    private long views = 0;
 
     public FundraiserDto toFundraiserDto(){
         return FundraiserDto.builder()
@@ -56,6 +61,7 @@ public class Fundraiser {
                 .cards(getCards())
                 .build();
     }
+
     public static FundraiserResponse toFundraiserResponse(Fundraiser fundraiser){
         return new FundraiserResponse(
                 fundraiser.getUser().getUser_id(),
@@ -72,11 +78,12 @@ public class Fundraiser {
                 fundraiser.isClosed(),
                 fundraiser.getViews());
     }
+
     public static List<FundraiserResponse> toListOfFundraiserResponse(List<Fundraiser> fundraiserList){
-        List<FundraiserResponse> fundraiserResponseList=new ArrayList<>();
+        List<FundraiserResponse> fundraiserResponseList = new ArrayList<>();
         fundraiserList.sort(Comparator.comparing(Fundraiser::getViews).reversed());
-        for(Fundraiser fundraiser:fundraiserList){
-            FundraiserResponse fundraiserResponse=new FundraiserResponse(
+        for (Fundraiser fundraiser:fundraiserList) {
+            FundraiserResponse fundraiserResponse = new FundraiserResponse(
                     fundraiser.getUser().getUser_id(),
                     fundraiser.getUser().getFullName(),
                     fundraiser.getFundraiserId(),

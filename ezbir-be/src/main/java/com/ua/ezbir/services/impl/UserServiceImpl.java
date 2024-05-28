@@ -9,7 +9,6 @@ import com.ua.ezbir.domain.exceptions.UserNotFoundException;
 import com.ua.ezbir.repository.RoleRepository;
 import com.ua.ezbir.repository.UserRepository;
 import com.ua.ezbir.services.UserService;
-import com.ua.ezbir.services.MinioService;
 import com.ua.ezbir.web.user.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +26,9 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserAuthenticationProvider userAuthenticationProvider;
-    private final MinioService minioService;
     private final RoleRepository roleRepository;
 
     @Override
@@ -147,6 +144,7 @@ public class UserServiceImpl implements UserService {
         return User.userToUserResponseWithToken(user,userAuthenticationProvider.createToken(user.getEmail()));
     }
 
+ /* TODO: impl photos by aws s3
     @Override
     @Transactional
     public String addPhoto(MultipartFile file) {
@@ -158,6 +156,7 @@ public class UserServiceImpl implements UserService {
         saveUser(user);
         return photoUrl;
     }
+ */
 
     @Override
     public void addInfoAboutYourself(String data) {

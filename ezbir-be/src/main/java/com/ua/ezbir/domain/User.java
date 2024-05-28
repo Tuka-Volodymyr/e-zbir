@@ -30,13 +30,15 @@ public class User implements UserDetails {
     private String password;
     private String infoAboutYourself;
     private String photoUrl;
-
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
-    @JsonManagedReference
-    private List<Fundraiser> fundraiserList;
     private LocalDateTime currentDateTime;
+
     @Column(columnDefinition = "bigint default 0")
     private long views = 0;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonManagedReference
+    private List<Fundraiser> fundraiserList;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
