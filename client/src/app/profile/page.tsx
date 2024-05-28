@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import {Avatar} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import FundraiserCard from "@/components/FundraiserCard";
+import SettingMenu from "@/components/SettingMenu";
 
 interface Fundraiser {
     cards: string[]
@@ -59,6 +60,7 @@ const Profile: React.FC = (props) =>{
                     </p>
 
                 </section>
+                <SettingMenu/>
             </section>
             <section className='flex flex-col flex-grow items-center p-4  w-[80%]'>
                 <CreateFundraiserMenu/>

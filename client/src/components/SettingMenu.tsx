@@ -1,9 +1,10 @@
-import {FormEvent, useState} from "react";
-import {Button, Drawer, DrawerProps, Space} from "antd";
+import {Drawer, Space} from "antd";
 import FundraiserForm from "@/components/FundraiserForm";
+import {FormEvent, useState} from "react";
 import axios from "axios";
+import SettingForm from "@/components/SettingForm";
 
-const CreateFundraiserMenu: React.FC = (props) =>{
+const SettingMenu: React.FC = (props) =>{
     const [open, setOpen] = useState(false);
 
 
@@ -32,11 +33,12 @@ const CreateFundraiserMenu: React.FC = (props) =>{
             })
 
     };
-    return(
-        <>
-            <button onClick={showDrawer} className='border-2 border-black w-full h-[144px]'>
-                Створити новий збір
+    return (
+        <section className='flex-grow flex justify-end h-full'>
+            <button onClick={showDrawer}>
+                <img src="/img/setting.svg" alt=""/>
             </button>
+
             <Drawer
                 title="Новий Збір"
                 placement='bottom'
@@ -55,10 +57,10 @@ const CreateFundraiserMenu: React.FC = (props) =>{
                     </Space>
                 }
             >
-                <FundraiserForm id='fundraiserForm' submit={hundleSubmit}/>
+                <SettingForm/>
             </Drawer>
-        </>
+        </section>
     );
 };
 
-export default CreateFundraiserMenu;
+export default SettingMenu;
